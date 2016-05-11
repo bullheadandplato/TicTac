@@ -3,5 +3,6 @@
 <Group xmlns="http://javafx.com/javafx/8"
        xmlns:fx="http://javafx.com/fxml/1"
        fx:id="mainNode"
+
 >
 </Group>
