@@ -1,6 +1,7 @@
 package com.osama.frontend;
 
 import com.osama.backend.Interface.Drawer;
+import com.osama.backend.Interface.Winner;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,8 +22,8 @@ public class MainViewController implements Initializable {
     private HBox box;
     private Canvas canvas;
     private Drawer drawer;
-    private int[] clickedBoxes=new int[9];
-    private int index=0;
+    private int[] clickedBoxes = new int[9];
+    private int index = 0;
     private int clickedX;
     private int clickedY;
     private static final int Box1X = 40;
@@ -31,7 +32,7 @@ public class MainViewController implements Initializable {
     private static final int Box3Y = 190;
     private static final int Box2X = 130;
     private static final int Box3X = 190;
-    private static int player=0;
+    private static int player = 0;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -40,64 +41,78 @@ public class MainViewController implements Initializable {
         box.getChildren().addAll(canvas);
         canvas.setOnMouseClicked(event -> {
             Platform.runLater(() -> {
-                if(index<=clickedBoxes.length){
+                if (index <= clickedBoxes.length) {
                     clickedX = (int) event.getX();
                     clickedY = (int) event.getY();
                     if (clickedX < Box1X && clickedY < Box1Y) {
-                        if(!isClicked(1)){
-                            clickedBoxes[index++]=1;
-                            drawer.drawImage(1,togglePlayer());
+                        if (!isClicked(-1)) {    //because by default array is initialized to 0 so can't use zero
+                            clickedBoxes[index++] = -1;
+                            drawer.drawImage(0, togglePlayer());
+                            Winner.isWinner(0,player);
                         }
-                    } else if (clickedX < Box1X && clickedY < Box2Y) {
-                        if(!isClicked(2)){
-                            clickedBoxes[index++]=2;
-                            drawer.drawImage(2,togglePlayer());
-                        }
-
-                    } else if (clickedX < Box1X && clickedY < Box3Y) {
-                        if(!isClicked(3)){
-                            clickedBoxes[index++]=3;
-                            drawer.drawImage(3,togglePlayer());
-
-                        }
-
                     } else if (clickedX < Box2X && clickedY < Box1Y) {
-                        if(!isClicked(4)){
-                            clickedBoxes[index++]=4;
-                            drawer.drawImage(4,togglePlayer());
+                        if (!isClicked(1)) {
+                            clickedBoxes[index++] = 1;
+                            drawer.drawImage(1, togglePlayer());
+                            Winner.isWinner(1,player);
 
-                        }
 
-                    } else if (clickedX < Box2X && clickedY < Box2Y) {
-                        if(!isClicked(5)){
-                            clickedBoxes[index++]=5;
-                            drawer.drawImage(5,togglePlayer());
-
-                        }
-                    } else if (clickedX < Box2X && clickedY < Box3Y) {
-                        if(!isClicked(6)){
-                            clickedBoxes[index++]=6;
-                            drawer.drawImage(6,togglePlayer());
                         }
                     } else if (clickedX < Box3X && clickedY < Box1Y) {
-                        if(!isClicked(7)){
-                            clickedBoxes[index++]=7;
-                            drawer.drawImage(7,togglePlayer());
+                        if (!isClicked(2)) {
+                            clickedBoxes[index++] = 2;
+                            drawer.drawImage(2, togglePlayer());
+                            Winner.isWinner(2,player);
+
+                        }
+                    } else if (clickedX < Box1X && clickedY < Box2Y) {
+                        if (!isClicked(3)) {
+                            clickedBoxes[index++] = 3;
+                            drawer.drawImage(3, togglePlayer());
+                            Winner.isWinner(3,player);
+
+                        }
+                    } else if (clickedX < Box2X && clickedY < Box2Y) {
+                        if (!isClicked(4)) {
+                            clickedBoxes[index++] = 4;
+                            drawer.drawImage(4, togglePlayer());
+                            Winner.isWinner(4,player);
+
+
                         }
                     } else if (clickedX < Box3X && clickedY < Box2Y) {
-                        if(!isClicked(8)){
-                            clickedBoxes[index++]=8;
-                            drawer.drawImage(8,togglePlayer());
+                        if (!isClicked(5)) {
+                            clickedBoxes[index++] = 5;
+                            drawer.drawImage(5, togglePlayer());
+                            Winner.isWinner(5,player);
+
+
+                        }
+                    } else if (clickedX < Box1X && clickedY < Box3Y) {
+                        if (!isClicked(6)) {
+                            clickedBoxes[index++] = 6;
+                            drawer.drawImage(6, togglePlayer());
+                            Winner.isWinner(6,player);
+
+
+                        }
+
+                    } else if (clickedX < Box2X && clickedY < Box3Y) {
+                        if (!isClicked(7)) {
+                            clickedBoxes[index++] = 7;
+                            drawer.drawImage(7, togglePlayer());
+                            Winner.isWinner(7,player);
 
                         }
                     } else if (clickedX < Box3X && clickedY < Box3Y) {
-                        if(!isClicked(9)){
-                            clickedBoxes[index++]=9;
-                            drawer.drawImage(9,togglePlayer());
+                        if (!isClicked(8)) {
+                            clickedBoxes[index++] = 8;
+                            drawer.drawImage(8, togglePlayer());
+                            Winner.isWinner(8,player);
+
                         }
                     }
-                }
-                else{
+                } else {
                     //do nothing yet
                 }
             });
@@ -105,25 +120,25 @@ public class MainViewController implements Initializable {
 
         });
     }
-    private int togglePlayer(){
-        if(player==0){
-            player=1;
-        }
-        else if(player==1){
-            player=2;
-        }
-        else if(player==2){
-            player=1;
+
+    private int togglePlayer() {
+        if (player == 0) {
+            player = 1;
+        } else if (player == 1) {
+            player = 2;
+        } else if (player == 2) {
+            player = 1;
         }
         return player;
     }
+
     @Contract(pure = true)
-    private boolean isClicked(int boxNumber){
-        boolean status=false;
-        for (int a:
-             clickedBoxes) {
-            if(a==boxNumber){
-                status=true;
+    private boolean isClicked(int boxNumber) {
+        boolean status = false;
+        for (int a :
+                clickedBoxes) {
+            if (a == boxNumber) {
+                status = true;
             }
         }
         return status;
