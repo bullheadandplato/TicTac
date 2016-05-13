@@ -8,41 +8,59 @@ import org.jetbrains.annotations.Contract;
  */
 public class Winner {
 
+    private static int index = 0;
+    private static int index1 = 0;
+
+    private static final int[][] WIN = {{0, 1, 2},
+            {3, 4, 5},
+            {6, 7, 8},
+            {0, 3, 6},
+            {1, 4, 7},
+            {2, 5, 8},
+            {0, 4, 8},
+            {2, 4, 6}
+    };
+    private static int[] playerOneChoice = {-1, -1, -1, -1, -1};// 0 has a technical problem while comparing.
+    private static int[] playerTwoChoice = {-1, -1, -1, -1, -1};
+    private static int[] winBoxes={-1,-1,-1};
 
 
-    private static int[] board=new int[9];
-    private static int index=0;
-    private static final int[][][] WinPATTERN={
-            {{1, 2}, {4, 8}, {3, 6}},
-            {{0, 2}, {4, 7}},
-            {{0, 1}, {4, 6}, {5, 8}},
-            {{4, 5}, {0, 6}},
-            {{3, 5}, {0, 8}, {2, 6}, {1, 7}},
-            {{3, 4}, {2, 8}},
-            {{7, 8}, {2, 4}, {0, 3}},
-            {{6, 8}, {1, 4}},
-            {{6, 7}, {0, 4}, {2, 5}}
-            };
-    public static boolean isWinner(int lastMove,int player){
-        boolean status=false;
-        board[index++]=player;
-        for (int a:
-             board) {
-            System.out.print(a);
+    public static boolean isWinner(int lastMove, int player) {
+        boolean status = false;
+        if (player == 1) {
+            playerOneChoice[index++] = lastMove;
+           status=check(playerOneChoice);
+        } else if (player == 2) {
+            playerTwoChoice[index1++] = lastMove;
+            status=check(playerTwoChoice);
         }
-
-            int temp=board[lastMove];
-            if(temp==0)
-                return false;
-            for(int i=0;i<WinPATTERN[lastMove].length;i++){
-                int[] line=WinPATTERN[lastMove][i];
-                if(temp==board[line[0]] && temp==board[line[1]]) {
-                    System.out.println("Victory for player: " + temp);
-                    status = true;
-
-                }
-        }
-
         return status;
+    }
+
+    private static boolean check(int[] p) {
+        if (index > 2) {
+
+            for ( int[] a : WIN ) {
+                int winCount = 0;
+                    for (int i = 0; i < p.length; i++) {
+                        for (int j = 0; j < a.length; j++) {
+                            if (p[i] == a[j]) {
+                                winBoxes[j]=a[j];
+                                winCount++;
+                            }
+                        }
+                        if (winCount == 3) {
+                            return true;
+                        }
+                    }
+                }
+
+            }
+        return false;
+
+    }
+
+    public static int[] getWinBoxes() {
+        return winBoxes;
     }
 }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.Font?>
+<VBox xmlns="http://javafx.com/javafx/8"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:id="mainNode"
+      fx:controller="com.osama.frontend.GameViewController"
+      alignment="CENTER"
+      spacing="20"
+
+>
+    <children>
+        <HBox fx:id="box"
+              alignment="CENTER"
+        >
+            <children>
+
+            </children>
+        </HBox>
+        <Text fx:id="winner"
+              style="-fx-fill: dodgerblue"
+              >
+            <font>
+                <Font size="20" />
+            </font>
+        </Text>
+    </children>
+</VBox>

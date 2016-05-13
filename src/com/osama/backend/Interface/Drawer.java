@@ -5,6 +5,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import org.jetbrains.annotations.Contract;
 
 /**
  * Created by osama on 5/11/16.
@@ -83,6 +84,53 @@ public class Drawer {
                 break;
             }
         }
+    }
+    public void drawWinLine(int[] winBoxes){
+        System.out.println("Victory");
+        winBoxes=sort(winBoxes); //sort the numbers
+        graphicsContext.setStroke(Color.RED);
+
+        if(winBoxes[0]==0 && winBoxes[2]==8){
+                graphicsContext.strokeLine(10,10,170,170);
+            }
+        else if(winBoxes[0]==0 && winBoxes[2]==2){
+                graphicsContext.strokeLine(10,10,170,10);
+            }
+        else if(winBoxes[0]==3 && winBoxes[2]==5){
+                graphicsContext.strokeLine(10,60,170,60);
+            }
+        else if(winBoxes[0]==6 && winBoxes[2]==8){
+                graphicsContext.strokeLine(10,165,170,165);
+
+        }
+        else if(winBoxes[0]==0 && winBoxes[2]==6){
+                graphicsContext.strokeLine(10,10,10,170);
+            }
+        else if(winBoxes[0]==1 && winBoxes[2]==7){
+                graphicsContext.strokeLine(60,10,60,170);
+            }
+        else if(winBoxes[0]==2 && winBoxes[2]==8){
+                graphicsContext.strokeLine(165,10,165,170);
+            }
+        else if(winBoxes[0]==2 && winBoxes[2]==6){
+                graphicsContext.strokeLine(165,10,10,170);
+            }
+
+
+    }
+
+    @Contract(pure = true)
+    private int[] sort(int[] win){
+        int min=win[0];
+        int temp;
+        for(int i=1;i<win.length;i++){
+            if(min>win[i]){
+                temp=win[i];
+                win[i]=min;
+                min=temp;
+            }
+        }
+        return win;
     }
 
 }
