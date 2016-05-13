@@ -53,6 +53,7 @@ public class GameViewController implements Initializable {
     }
 
 
+
     public void setWinner(int player){
         if(player==1){
             winner.setText("Winner: "+player1Name);
