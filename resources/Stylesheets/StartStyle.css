@@ -1,0 +1,17 @@
+.label{
+    -fx-text-fill: dodgerblue;
+    -fx-font-size: 16;
+    -fx-font-family: fantasy;
+}
+.button{
+    -fx-background-color: dodgerblue;
+    -fx-text-fill: white;
+    -fx-font-size: 16;
+}
+.button:hover{
+    -fx-background-color: dodgerblue;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-border-radius: 20px;
+
+}

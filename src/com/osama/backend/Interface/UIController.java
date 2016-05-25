@@ -5,6 +5,7 @@ import org.jetbrains.annotations.Contract;
 
 /**
  * Created by osama on 5/13/16.
+ * Controls the interface explicitly.
  */
 public class UIController {
     private int[] clickedBoxes = new int[9];
@@ -14,8 +15,8 @@ public class UIController {
     private static final int Box3Y = 190;
     private static final int Box2X = 130;
     private static final int Box3X = 190;
-    private static int player = 0;
-    private static boolean notWinner=true;
+    private int player = 0;
+    private boolean notWinner=true;
     private Drawer drawer;
     private int index = 0;
 
@@ -160,4 +161,19 @@ public class UIController {
         notWinner=false;
         return player;
     }
+    public int getPlayer(){
+        return player;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void clearGameDrawing(){
+        Winner.resetAll();
+        notWinner=true;
+        player=0;
+        clickedBoxes=null;
+    }
+
 }

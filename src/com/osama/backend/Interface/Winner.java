@@ -63,4 +63,15 @@ public class Winner {
     public static int[] getWinBoxes() {
         return winBoxes;
     }
+    public static void resetAll(){
+        index=0;
+        index1=0;
+        for(int i=0;i<playerOneChoice.length;i++){
+            if(i<3){
+                winBoxes[i]=-1;
+            }
+            playerOneChoice[i]=-1;
+            playerTwoChoice[i]=-1;
+        }
+    }
 }

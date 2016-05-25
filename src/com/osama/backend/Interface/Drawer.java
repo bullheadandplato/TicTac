@@ -16,7 +16,10 @@ public class Drawer {
     private static final int w = 30;
     private static final int h = 30;
     private Image image;
+public Drawer(){
 
+
+}
 
     public Canvas drawGame() {
         canvas = new Canvas(200, 200);
@@ -27,8 +30,9 @@ public class Drawer {
     }
 
     private void drawLines(GraphicsContext gc) {
+        gc.clearRect(0,0,canvas.getWidth(),canvas.getHeight());
         gc.setLineWidth(5);
-        gc.setStroke(Color.CYAN);
+        gc.setStroke(Color.GREEN);
         gc.beginPath();
         gc.strokeLine(0, 40, 190, 30);
         gc.strokeLine(40, 0, 30, 190);
@@ -86,7 +90,6 @@ public class Drawer {
         }
     }
     public void drawWinLine(int[] winBoxes){
-        System.out.println("Victory");
         winBoxes=sort(winBoxes); //sort the numbers
         graphicsContext.setStroke(Color.RED);
 
@@ -107,7 +110,7 @@ public class Drawer {
                 graphicsContext.strokeLine(10,10,10,170);
             }
         else if(winBoxes[0]==1 && winBoxes[2]==7){
-                graphicsContext.strokeLine(60,10,60,170);
+                graphicsContext.strokeLine(80,10,80,170);
             }
         else if(winBoxes[0]==2 && winBoxes[2]==8){
                 graphicsContext.strokeLine(165,10,165,170);
