@@ -90,7 +90,6 @@ public Drawer(){
         }
     }
     public void drawWinLine(int[] winBoxes){
-        winBoxes=sort(winBoxes); //sort the numbers
         graphicsContext.setStroke(Color.RED);
 
         if(winBoxes[0]==0 && winBoxes[2]==8){
@@ -120,20 +119,6 @@ public Drawer(){
             }
 
 
-    }
-
-    @Contract(pure = true)
-    private int[] sort(int[] win){
-        int min=win[0];
-        int temp;
-        for(int i=1;i<win.length;i++){
-            if(min>win[i]){
-                temp=win[i];
-                win[i]=min;
-                min=temp;
-            }
-        }
-        return win;
     }
 
 }

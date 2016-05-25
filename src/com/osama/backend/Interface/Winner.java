@@ -61,7 +61,21 @@ public class Winner {
     }
 
     public static int[] getWinBoxes() {
+        winBoxes=sort(winBoxes); //sort the numbers
         return winBoxes;
+    }
+    @Contract(pure = true)
+    private static int[] sort(int[] win){
+        int min=win[0];
+        int temp;
+        for(int i=1;i<win.length;i++){
+            if(min>win[i]){
+                temp=win[i];
+                win[i]=min;
+                min=temp;
+            }
+        }
+        return win;
     }
     public static void resetAll(){
         index=0;

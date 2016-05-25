@@ -17,8 +17,6 @@ public class StartViewController implements Initializable {
     @FXML
     public TextField player1Name;
     @FXML
-    private TextField player2Name;
-    @FXML
             private Text error;
 
     Main obj=new Main();
@@ -28,8 +26,7 @@ public class StartViewController implements Initializable {
     }
 
     public void startGame(ActionEvent actionEvent) {
-            if (player1Name.getText().length() > 0 && player2Name.getText().length() > 0) {
-                GameViewController.player2Name = player2Name.getText();
+            if (player1Name.getText().length() > 0 ) {
                 GameViewController.player1Name = player1Name.getText();
                 try {
                     obj.changeScene();
