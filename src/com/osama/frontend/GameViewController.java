@@ -1,9 +1,12 @@
 package com.osama.frontend;
 
 import com.osama.backend.Interface.Drawer;
+import com.osama.backend.Interface.ServerConnector;
 import com.osama.backend.Interface.UIController;
 import com.osama.backend.Interface.Winner;
+import com.sun.javafx.tk.Toolkit;
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,6 +21,7 @@ import javafx.scene.text.Text;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Created by osama on 5/11/16.
@@ -35,19 +39,19 @@ public class GameViewController implements Initializable {
 
     private Canvas canvas;
     private UIController controller;
-
     private int clickedX;
     private int clickedY;
     public static String player1Name;
-    public static String player2Name;
+    public volatile static String player2Name;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        controller=new UIController(this);
         startGame();
+
+
     }
-
-
 
     public void setStatus(int player){
         whichPlayer.setText("Game Over");
@@ -71,16 +75,17 @@ public class GameViewController implements Initializable {
         this.canvas=null;
         startGame();
     }
-    private void startGame(){
+
+    public void startGame(){
+        box.setVisible(false);
         whichPlayer.setText(player1Name+"'s Turn");
         if(winner.getText().length()>0){
             winner.setText("");
         }
-        if (controller!=null){
+        if(controller!=null){
             controller.clearGameDrawing();
-            controller=null;
         }
-        controller=new UIController();
+
         restart.setVisible(false);
         canvas = controller.drawGame();
         box.getChildren().clear();
@@ -108,5 +113,9 @@ public class GameViewController implements Initializable {
 
 
         });
+
+    }
+    public void setEnable(){
+        box.setVisible(true);
     }
 }

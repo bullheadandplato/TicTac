@@ -1,6 +1,7 @@
 package com.osama.backend.Interface;
 
 import com.osama.frontend.GameViewController;
+import javafx.application.Platform;
 
 import java.io.*;
 import java.net.Socket;
@@ -9,13 +10,18 @@ import java.nio.Buffer;
 /**
  * Created by osama on 5/25/16.
  */
-public class ServerConnector extends Thread implements ServerOperations {
+public class ServerConnector extends Thread implements ServerOperations{
     Socket s;
     DataInputStream br;
     DataOutputStream bw;
-    UIController a;
-    ServerConnector(UIController x){
-        a=x;
+    UIController aController;
+
+    public void setaController(UIController a) {
+        aController=a;
+    }
+
+    public ServerConnector(){
+
     }
     @Override
     public boolean createConnection() {
@@ -23,7 +29,9 @@ public class ServerConnector extends Thread implements ServerOperations {
             s=new Socket("127.0.0.1",5001);
             br=new DataInputStream(s.getInputStream());
             bw=new DataOutputStream(s.getOutputStream());
+            //tell the server who you are
             bw.writeUTF(GameViewController.player1Name);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -80,18 +88,25 @@ public class ServerConnector extends Thread implements ServerOperations {
     public void run(){
         try{
             while (true){
-                System.out.println("Run called in ServerConnector");
-                int box=br.read();
-                a.drawBox(box);
-                if(br.readUTF().startsWith("wins")){
-                    a.wins(Integer.parseInt(br.readUTF().substring(4,br.readUTF().length())));
+                System.out.println("Run called osma");
+                String command=br.readUTF();
+                if(command.startsWith("wins")){
+                    aController.wins(Integer.parseInt(br.readUTF().substring(4,br.readUTF().length())));
                 }
-                if(br.readUTF().startsWith("name")){
-                    System.out.println("Run name 123");
-                    GameViewController.player2Name=br.readUTF().substring(4,br.readUTF().length());
+                if(command.startsWith("name")){
+                    System.out.println("Run name 123: "+command);
+                    GameViewController.player2Name=command.substring(4,command.length());
+
                 }
-                if(br.readUTF().equalsIgnoreCase("match")){
-                    a.startGame();
+                if(command.startsWith("match")){
+                    System.out.println("Google is fucked");
+                   aController.setGameStatus(true);
+                    
+                }
+                if(command.startsWith("move")){
+                    int box=Integer.parseInt(command.substring(4,command.length()));
+                    System.out.println("Google got me");
+                    aController.drawBox(box);
                 }
 
             }
@@ -99,4 +114,5 @@ public class ServerConnector extends Thread implements ServerOperations {
 
         }
     }
+
 }

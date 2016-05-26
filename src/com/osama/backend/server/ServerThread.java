@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by osama on 5/24/16.
@@ -15,7 +16,7 @@ public class ServerThread extends Thread {
     static final String matchTAG="match";
     static final String moveTAG="move";
     static final String WINTAG="wins";
-    private HashMap<Socket,String> clientNames=new HashMap<>();
+    private static ConcurrentHashMap<Socket,String> clientNames=new ConcurrentHashMap<>();
     static List<Socket> connectedClients=new ArrayList<>();
     static List<Socket> busyClients=new ArrayList<>();
     DataInputStream bufferedReader;
@@ -48,6 +49,7 @@ public class ServerThread extends Thread {
                                 s.move(Integer.parseInt(command.substring(4,command.length())),socket);
                             }
                             if(s.player2==this.socket){
+
                                 s.move(Integer.parseInt(command.substring(4,command.length())),socket);
                             }
                         }
@@ -83,16 +85,18 @@ public class ServerThread extends Thread {
             GamePlay abc=new GamePlay(a,b);
             onGoingMatches.add(abc);
             //write names of each other
-            try {
+           try {
                 DataOutputStream temp=new DataOutputStream(a.getOutputStream());
                 temp.writeUTF("name"+clientNames.get(b));
                 temp=null;
                 temp=new DataOutputStream(b.getOutputStream());
                 temp.writeUTF("name"+clientNames.get(a));
-                temp=null;
+
+               temp=null;
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
 
         }
 

@@ -26,7 +26,7 @@
             <HBox spacing="10"
                   alignment="CENTER"
             >
-                <Label text="Player One Name: "
+                <Label text="Your Name: "
                 />
                 <TextField fx:id="player1Name"
 

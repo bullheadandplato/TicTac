@@ -1,5 +1,6 @@
 package com.osama.frontend;
 
+import com.osama.backend.Interface.ServerConnector;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -28,6 +29,7 @@ public class StartViewController implements Initializable {
     public void startGame(ActionEvent actionEvent) {
             if (player1Name.getText().length() > 0 ) {
                 GameViewController.player1Name = player1Name.getText();
+
                 try {
                     obj.changeScene();
                 } catch (IOException e) {

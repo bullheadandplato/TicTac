@@ -1,7 +1,10 @@
 package com.osama.backend.Interface;
 
+import com.osama.frontend.GameViewController;
 import javafx.scene.canvas.Canvas;
 import org.jetbrains.annotations.Contract;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Created by osama on 5/13/16.
@@ -20,14 +23,30 @@ public class UIController {
     private boolean notWinner=true;
     private Drawer drawer;
     private int index = 0;
+    private GameViewController manageInterface;
+    private AtomicBoolean gameStatus;
 
-    public UIController(){
-        server=new ServerConnector(this);
-        server.createConnection();
-        server.arrangeMatch();
+    public void setGameStatus(boolean gameStatus) {
+        this.gameStatus.set(gameStatus);
+        check();
     }
-    public void startGame(){
+
+    private void check() {
+        if(gameStatus.get()){
+            manageInterface.setEnable();
+        }
+    }
+
+    public UIController(GameViewController a){
+        gameStatus=new AtomicBoolean();
+        gameStatus.set(false);
+        manageInterface=a;
+        server=new ServerConnector();
+        server.createConnection();
+        server.setaController(this);
+        server.arrangeMatch();
         drawer=new Drawer();
+
     }
 
     public boolean determineMove(int clickedX,int clickedY){
@@ -206,6 +225,7 @@ public class UIController {
         notWinner=true;
         player=0;
         clickedBoxes=null;
+        clickedBoxes=new int[9];
     }
     public void drawBox(int box){
         drawer.drawImage(box,togglePlayer());
@@ -255,6 +275,7 @@ public class UIController {
         }
         drawer.drawWinLine(temp);
     }
-
-
+    public void startGame(){
+        manageInterface.startGame();
+    }
 }
