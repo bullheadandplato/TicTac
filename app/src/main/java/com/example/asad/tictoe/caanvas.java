@@ -94,6 +94,7 @@ public void Boxtrack()//This give the value to array e.g if first box is touch t
     {
         arr[0] = 1;
         width = (int) (firstcord - thirdcord+5);
+
         height = (int) (sixcord - fifthcord+5);
         Place_Images_In_Boxes();
 
