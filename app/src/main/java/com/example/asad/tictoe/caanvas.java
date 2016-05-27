@@ -23,6 +23,7 @@ public Canvas canvas1=new Canvas();
     public float x_axis,y_axis;
     int height,width;
     Bitmap mFinalbitmap= BitmapFactory.decodeResource(getResources(), R.drawable.cross);
+    public int []arr=new int[9];
 
    public  float firstcord=0f,secndcord=0f,thirdcord=0f,forthcord=0f,fifthcord=0f,sixcord=0f,sevencord=0f,eightcord=0f;
     public float widthborder=0f;
@@ -54,29 +55,8 @@ public Canvas canvas1=new Canvas();
         canvas.drawLine(secndcord, fifthcord, secndcord, eightcord, paint);
         canvas.drawLine(thirdcord, sixcord, forthcord, sixcord, paint);
         canvas.drawLine(thirdcord, sevencord, forthcord, sevencord, paint);
+        Boxtrack();
 
-        if(thirdcord<x_axis&&x_axis<firstcord&&fifthcord<y_axis&&y_axis<sixcord)//For A11 Box
-        {
-         width=(int)(firstcord-thirdcord);
-         height=(int)(sixcord-fifthcord);
-         Showimage();
-        }
-        else if(firstcord<x_axis&&x_axis<secndcord&&fifthcord<y_axis&&y_axis<sixcord)
-    Showimage2();
-        //else if(secndcord<x_axis&&x_axis<forthcord&&fifthcord<y_axis&&y_axis<sixcord)
-   // Showimage();
-       // else if(thirdcord<x_axis&&x_axis<firstcord&&sixcord<y_axis&&y_axis<sevencord)
-       // Showimage();
-        //else if(firstcord<x_axis&&x_axis<secndcord&&sixcord<y_axis&&y_axis<sevencord)
-         //   Showimage();
-       // else if (secndcord<x_axis&&x_axis<forthcord&&sixcord<y_axis&&y_axis<sevencord)
-     //Showimage();
-        //else if (thirdcord<x_axis&&x_axis<firstcord&&sevencord<y_axis&&y_axis<eightcord)
-   // Showimage();
-        //else  if (firstcord<x_axis&&x_axis<secndcord&&sevencord<y_axis&&y_axis<eightcord)
-    //Showimage();
-      //  else if(secndcord<x_axis&&x_axis<forthcord&&sevencord<y_axis&&y_axis<eightcord)
-  //  Showimage();
 
     }
 
@@ -109,5 +89,36 @@ public Canvas canvas1=new Canvas();
         mFinalbitmap = Bitmap.createScaledBitmap(mFinalbitmap, width, height, false);
         canvas1.drawBitmap(mFinalbitmap, firstcord, fifthcord, null);
     }
+public void Boxtrack()//This give the value to array e.g if first box is touch then arr[0]=1
+{
+    if(thirdcord<x_axis&&x_axis<firstcord&&fifthcord<y_axis&&y_axis<sixcord)//For A11 Box
+    {
+        arr[0]=1;
+        width=(int)(firstcord-thirdcord);
+        height=(int)(sixcord-fifthcord);
 
+    }
+    else if(firstcord<x_axis&&x_axis<secndcord&&fifthcord<y_axis&&y_axis<sixcord)
+        arr[1]=2;
+    else if(secndcord<x_axis&&x_axis<forthcord&&fifthcord<y_axis&&y_axis<sixcord)
+        arr[2]=3;
+    else if(thirdcord<x_axis&&x_axis<firstcord&&sixcord<y_axis&&y_axis<sevencord)
+        arr[3]=4;
+    else if(firstcord<x_axis&&x_axis<secndcord&&sixcord<y_axis&&y_axis<sevencord)
+        arr[4]=5;
+    else if (secndcord<x_axis&&x_axis<forthcord&&sixcord<y_axis&&y_axis<sevencord)
+        arr[5]=6;
+    else if (thirdcord<x_axis&&x_axis<firstcord&&sevencord<y_axis&&y_axis<eightcord)
+        arr[6]=7;
+    else  if (firstcord<x_axis&&x_axis<secndcord&&sevencord<y_axis&&y_axis<eightcord)
+        arr[7]=8;
+    else if(secndcord<x_axis&&x_axis<forthcord&&sevencord<y_axis&&y_axis<eightcord)
+        arr[8]=9;
+
+}
+    public  void Place_Images_In_Boxes()//This check the
+    {
+
+
+    }
 }
