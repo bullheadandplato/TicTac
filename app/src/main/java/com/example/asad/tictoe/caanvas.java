@@ -69,7 +69,6 @@ public Canvas canvas1=new Canvas();
         {
             case MotionEvent.ACTION_DOWN://avc
 
-                ;
                 invalidate();
                 break;
         }
@@ -91,15 +90,17 @@ public Canvas canvas1=new Canvas();
     }
 public void Boxtrack()//This give the value to array e.g if first box is touch then arr[0]=1
 {
-    if(thirdcord<x_axis&&x_axis<firstcord&&fifthcord<y_axis&&y_axis<sixcord)//For A11 Box
+    if (thirdcord < x_axis && x_axis < firstcord && fifthcord < y_axis && y_axis < sixcord)//For A11 Box
     {
-        arr[0]=1;
-        width=(int)(firstcord-thirdcord);
-        height=(int)(sixcord-fifthcord);
+        arr[0] = 1;
+        width = (int) (firstcord - thirdcord+5);
+        height = (int) (sixcord - fifthcord+5);
+        Place_Images_In_Boxes();
 
-    }
-    else if(firstcord<x_axis&&x_axis<secndcord&&fifthcord<y_axis&&y_axis<sixcord)
-        arr[1]=2;
+    } else if (firstcord < x_axis && x_axis < secndcord && fifthcord < y_axis && y_axis < sixcord)
+    {       arr[1] = 2;
+        Place_Images_In_Boxes();
+}
     else if(secndcord<x_axis&&x_axis<forthcord&&fifthcord<y_axis&&y_axis<sixcord)
         arr[2]=3;
     else if(thirdcord<x_axis&&x_axis<firstcord&&sixcord<y_axis&&y_axis<sevencord)
@@ -122,8 +123,14 @@ public void Boxtrack()//This give the value to array e.g if first box is touch t
 
 for(int arrtem:arr)
 {
-    if(arrtem==1)
-
+    switch (arrtem) {
+        case 1:
+    Showimage();
+            break;
+        case 2:
+            Showimage2();
+            break;
+}
 
 
 }
