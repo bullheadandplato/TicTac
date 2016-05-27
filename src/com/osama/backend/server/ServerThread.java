@@ -55,7 +55,7 @@ public class ServerThread extends Thread {
                         }
                 }
                 else if(command.startsWith(WINTAG)){
-                        int sum=Integer.parseInt(bufferedReader.readUTF().substring(4,bufferedReader.readUTF().length()));
+                        int sum=Integer.parseInt(command.substring(4,command.length()));
                         for (GamePlay s:
                                 onGoingMatches){
                             if(s.player1==socket){
@@ -69,7 +69,29 @@ public class ServerThread extends Thread {
 
                 }
         }catch (Exception e){
-            e.printStackTrace();
+            int i=0;
+            for (Socket a:
+                 connectedClients) {
+                if(a==socket){
+                    connectedClients.remove(i);
+                    System.out.println("Client removed");
+                    break;
+                }
+                i++;
+            }
+            if(i==0){
+                i=0;
+                for (Socket a:
+                     busyClients) {
+                    if(a==socket){
+                        busyClients.remove(i);
+                        clientNames.remove(socket);
+                        System.out.println("Client remove");
+                        break;
+                    }
+                    i++;
+                }
+            }
         }
     }
     private void arrangeMatch(){

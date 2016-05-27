@@ -14,6 +14,8 @@ import java.net.Socket;
 public class GamePlay {
     Socket player1;
     Socket player2;
+    private int player1id;
+    private int player2id;
     private DataOutputStream bw1;
     private DataOutputStream bw2;
     public GamePlay(Socket player1,Socket player2){
@@ -24,7 +26,8 @@ public class GamePlay {
             bw2=new DataOutputStream(player2.getOutputStream());
             bw2.writeUTF("match");
             bw1.writeUTF("match");
-            System.out.println("It wents smoothly");
+            setPlayerIDs();
+
 
         }catch (IOException e){
             e.printStackTrace();
@@ -59,6 +62,19 @@ public class GamePlay {
         }catch (IOException e){
             e.printStackTrace();
         }
+    }
+    public void setPlayerIDs(){
+        player1id=1;
+        player2id=2;
+        try{
+            bw1.writeUTF("player"+player1id);
+            bw2.writeUTF("player"+player2id);
+            System.out.println("Writing player ids");
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
     }
 
 }

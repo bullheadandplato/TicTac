@@ -36,6 +36,10 @@ public class GameViewController implements Initializable {
     private Label whichPlayer;
     @FXML
     private Button restart;
+    @FXML
+    private Label playerText1;
+    @FXML
+    private Label playerText2;
 
     private Canvas canvas;
     private UIController controller;
@@ -43,7 +47,11 @@ public class GameViewController implements Initializable {
     private int clickedY;
     public static String player1Name;
     public volatile static String player2Name;
+    private int playerID=0;
 
+    public void setPlayerID(int playerID) {
+        this.playerID = playerID;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -78,7 +86,7 @@ public class GameViewController implements Initializable {
 
     public void startGame(){
         box.setVisible(false);
-        whichPlayer.setText(player1Name+"'s Turn");
+        whichPlayer.setText("Waiting for someone to connect");
         if(winner.getText().length()>0){
             winner.setText("");
         }
@@ -101,14 +109,7 @@ public class GameViewController implements Initializable {
                 else if(controller.getIndex()==9){
                     setStatus(0);
                 }
-                else{
-                    if(controller.getPlayer()==2){
-                        whichPlayer.setText(player1Name+"'s Turn");
-                    }
-                    else{
-                        whichPlayer.setText(player2Name+"'s Turn");
-                    }
-                }
+
             });
 
 
@@ -117,5 +118,16 @@ public class GameViewController implements Initializable {
     }
     public void setEnable(){
         box.setVisible(true);
+    }
+    public void setTurns(int player){
+        if(player==playerID){
+            playerText2.setVisible(false);
+            playerText1.setVisible(true);
+
+        }
+        else{
+            playerText1.setVisible(false);
+            playerText2.setVisible(true);
+        }
     }
 }

@@ -18,6 +18,14 @@
     <children>
         <Label fx:id="whichPlayer"
                />
+        <Label fx:id="playerText1"
+               text="Your Turn"
+               visible="false"
+        />
+        <Label fx:id="playerText2"
+               text="Opponent's Turn"
+               visible="false"
+        />
         <HBox fx:id="box"
               alignment="CENTER"
         >

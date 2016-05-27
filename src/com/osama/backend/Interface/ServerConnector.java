@@ -88,10 +88,10 @@ public class ServerConnector extends Thread implements ServerOperations{
     public void run(){
         try{
             while (true){
-                System.out.println("Run called osma");
                 String command=br.readUTF();
                 if(command.startsWith("wins")){
-                    aController.wins(Integer.parseInt(br.readUTF().substring(4,br.readUTF().length())));
+                    System.out.println("The whole world is destroyed");
+                    aController.wins(Integer.parseInt(command.substring(4,command.length())));
                 }
                 if(command.startsWith("name")){
                     System.out.println("Run name 123: "+command);
@@ -99,17 +99,22 @@ public class ServerConnector extends Thread implements ServerOperations{
 
                 }
                 if(command.startsWith("match")){
-                    System.out.println("Google is fucked");
                    aController.setGameStatus(true);
                     
                 }
                 if(command.startsWith("move")){
                     int box=Integer.parseInt(command.substring(4,command.length()));
-                    System.out.println("Google got me");
                     aController.drawBox(box);
+                }
+                if(command.startsWith("player")){
+                    System.out.println("Command length is "+command.length());
+                    int player=Integer.parseInt(command.substring(6,command.length()));
+                    System.out.println("Got in player sets in ServerConnector");
+                    aController.setPlayer(player);
                 }
 
             }
+
         }catch (Exception e){
 
         }
