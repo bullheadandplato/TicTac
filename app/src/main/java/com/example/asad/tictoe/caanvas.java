@@ -116,9 +116,16 @@ public void Boxtrack()//This give the value to array e.g if first box is touch t
         arr[8]=9;
 
 }
-    public  void Place_Images_In_Boxes()//This check the
+    public  void Place_Images_In_Boxes()//This check the which box is touched and which is not and fill the touched boxes with image
     {
 
+for(int arrtem:arr)
+{
+    if(arrtem==1)
+
+
+
+}
 
     }
 }
