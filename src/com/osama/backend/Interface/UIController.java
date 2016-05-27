@@ -18,7 +18,7 @@ public class UIController {
     private static final int Box3Y = 190;
     private static final int Box2X = 130;
     private static final int Box3X = 190;
-    private int player = 0;
+    private int player = 1;
     ServerConnector server;
     private boolean notWinner=true;
     private Drawer drawer;
@@ -34,11 +34,7 @@ public class UIController {
     public void setPlayer(int player) {
         this.player = player;
         manageInterface.setPlayerID(player);
-        if(player==1){
-            manageInterface.setTurns(player);
-        }else{
-            manageInterface.setTurns(0);
-        }
+
     }
 
     private void check() {
@@ -62,14 +58,12 @@ public class UIController {
     public boolean determineMove(int clickedX,int clickedY){
         boolean status=false;
         if (index <= clickedBoxes.length && notWinner) {
-
+            manageInterface.setClickable(false);
             if (clickedX < Box1X && clickedY < Box1Y) {
                 if (!isClicked(-1)) {    //because by default array is initialized to 0 so can't use zero
                     clickedBoxes[index++] = -1;
                     drawer.drawImage(0, player);
                     server.drawMove(0);
-                    togglePlayer();
-
                     if(Winner.isWinner(0,player)){
                         drawer.drawWinLine(Winner.getWinBoxes());
                         server.wins(Winner.getWinBoxes());
@@ -82,7 +76,6 @@ public class UIController {
                     clickedBoxes[index++] = 1;
                     drawer.drawImage(1, player);
                     server.drawMove(1);
-                    togglePlayer();
 
                     if (Winner.isWinner(1, player)) {
                         drawer.drawWinLine(Winner.getWinBoxes());
@@ -96,7 +89,6 @@ public class UIController {
                     clickedBoxes[index++] = 2;
                     drawer.drawImage(2, player);
                     server.drawMove(2);
-                    togglePlayer();
                     if(Winner.isWinner(2,player)){
                         drawer.drawWinLine(Winner.getWinBoxes());
                         server.wins(Winner.getWinBoxes());
@@ -110,7 +102,6 @@ public class UIController {
                     clickedBoxes[index++] = 3;
                     server.drawMove(3);
                     drawer.drawImage(3, player);
-                    togglePlayer();
                     if(Winner.isWinner(3,player)){
                         drawer.drawWinLine(Winner.getWinBoxes());
                         server.wins(Winner.getWinBoxes());
@@ -124,7 +115,6 @@ public class UIController {
                     clickedBoxes[index++] = 4;
                     server.drawMove(4);
                     drawer.drawImage(4, player);
-                    togglePlayer();
                     if(Winner.isWinner(4,player)){
                         drawer.drawWinLine(Winner.getWinBoxes());
                         server.wins(Winner.getWinBoxes());
@@ -139,7 +129,6 @@ public class UIController {
                     clickedBoxes[index++] = 5;
                     server.drawMove(5);
                     drawer.drawImage(5, player);
-                    togglePlayer();
                     if(Winner.isWinner(5,player)){
                         drawer.drawWinLine(Winner.getWinBoxes());
                         server.wins(Winner.getWinBoxes());
@@ -153,7 +142,6 @@ public class UIController {
                     clickedBoxes[index++] = 6;
                     server.drawMove(6);
                     drawer.drawImage(6, player);
-                    togglePlayer();
                     if(Winner.isWinner(6,player)){
                         drawer.drawWinLine(Winner.getWinBoxes());
                         server.wins(Winner.getWinBoxes());
@@ -168,7 +156,6 @@ public class UIController {
                     clickedBoxes[index++] = 7;
                     server.drawMove(7);
                     drawer.drawImage(7, player);
-                    togglePlayer();
                     if(Winner.isWinner(7,player)){
                         drawer.drawWinLine(Winner.getWinBoxes());
                         server.wins(Winner.getWinBoxes());
@@ -182,7 +169,6 @@ public class UIController {
                     clickedBoxes[index++] = 8;
                     server.drawMove(8);
                     drawer.drawImage(8, player);
-                    togglePlayer();
                     if(Winner.isWinner(8,player)){
                         drawer.drawWinLine(Winner.getWinBoxes());
                         server.wins(Winner.getWinBoxes());
@@ -196,17 +182,6 @@ public class UIController {
             //do nothing yet
         }
         return status;
-    }
-    private int togglePlayer() {
-        if (player == 0) {
-            player = 1;
-        } else if (player == 1) {
-            player = 2;
-        } else if (player == 2) {
-            player = 1;
-        }
-        manageInterface.setTurns(player);
-        return player;
     }
 
     @Contract(pure = true)
@@ -243,7 +218,7 @@ public class UIController {
         clickedBoxes=new int[9];
     }
     public void drawBox(int box){
-        manageInterface.setTurns(player);
+        manageInterface.setClickable(true);
         if(player==1){
             drawer.drawImage(box,2);
         }

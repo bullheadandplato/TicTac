@@ -51,11 +51,16 @@ public class GameViewController implements Initializable {
 
     public void setPlayerID(int playerID) {
         this.playerID = playerID;
+        if(this.playerID==2)
+            setClickable(false);
+        else
+            setClickable(true);
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         controller=new UIController(this);
+        restart.setText("Restart");
         startGame();
 
 
@@ -73,7 +78,6 @@ public class GameViewController implements Initializable {
             winner.setText("Draw");
         }
         restart.setVisible(true);
-        restart.setText("Restart");
 
     }
 
@@ -115,17 +119,21 @@ public class GameViewController implements Initializable {
 
         });
 
+
     }
     public void setEnable(){
         box.setVisible(true);
     }
-    public void setTurns(int player){
-        if(player==playerID){
+
+    public void setClickable(boolean status){
+
+        if(status){
+            box.setDisable(false);
             playerText2.setVisible(false);
             playerText1.setVisible(true);
-
         }
         else{
+            box.setDisable(true);
             playerText1.setVisible(false);
             playerText2.setVisible(true);
         }
