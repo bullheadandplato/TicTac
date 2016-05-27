@@ -15,20 +15,20 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(new caanvas(this));
+        setContentView(R.layout.activity_main);
 
 
-        final caanvas nextshow=new caanvas(this);
+        final caanvas Gameshow=new caanvas(this);
         Button playbtn=(Button)findViewById(R.id.button1);
-/*
+
 playbtn.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        setContentView(nextshow);
+        setContentView(Gameshow);
     }
 });
        // Getstart();
-*/
+
     }
    /* public void Getstart()
     { String getcoins=null;

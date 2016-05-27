@@ -1,10 +1,14 @@
 package com.example.asad.tictoe;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.nfc.Tag;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -15,26 +19,18 @@ import android.widget.Toast;
  * Created by asad on 5/25/16.
  */
 public class caanvas extends View {
-    ;
+public Canvas canvas1=new Canvas();
+    public float x_axis,y_axis;
+    int height,width;
 
+   public  float firstcord=0f,secndcord=0f,thirdcord=0f,forthcord=0f,fifthcord=0f,sixcord=0f,sevencord=0f,eightcord=0f;
+    public float widthborder=0f;
+   public float h = getContext().getResources().getDisplayMetrics().heightPixels;
+   public  float w = getContext().getResources().getDisplayMetrics().widthPixels;
     public caanvas(Context context) {
         super(context);
 
-    }
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        float firstcord,secndcord,thirdcord,forthcord,fifthcord,sixcord,sevencord,eightcord;
-        float widthborder;
-
-        Paint paint = new Paint();
-        paint.setColor(Color.LTGRAY);
-
-        float h = getContext().getResources().getDisplayMetrics().heightPixels;
-        float w = getContext().getResources().getDisplayMetrics().widthPixels;
         widthborder=w/72f;
-        paint.setStrokeWidth(widthborder);
         firstcord=w/2.88f;
         secndcord=w/1.5f;
         thirdcord=w/18f;
@@ -43,18 +39,66 @@ public class caanvas extends View {
         sixcord=h/2.46f;
         sevencord=h/1.63f;
         eightcord=h/1.28f;
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        canvas1=canvas;
+        Paint paint = new Paint();
+        paint.setColor(Color.LTGRAY);
+        paint.setStrokeWidth(widthborder);
         canvas.drawLine(firstcord, fifthcord, firstcord, eightcord, paint);
         canvas.drawLine(secndcord, fifthcord, secndcord, eightcord, paint);
         canvas.drawLine(thirdcord, sixcord, forthcord, sixcord, paint);
         canvas.drawLine(thirdcord, sevencord, forthcord, sevencord, paint);
 
+        if(thirdcord<x_axis&&x_axis<firstcord&&fifthcord<y_axis&&y_axis<sixcord)//For A11 Box
+        {
+         width=(int)(firstcord-thirdcord);
+         height=(int)(sixcord-fifthcord);
+         Showimage();
+        }
+        else if(firstcord<x_axis&&x_axis<secndcord&&fifthcord<y_axis&&y_axis<sixcord)
+    Showimage();
+        else if(secndcord<x_axis&&x_axis<forthcord&&fifthcord<y_axis&&y_axis<sixcord)
+    Showimage();
+        else if(thirdcord<x_axis&&x_axis<firstcord&&sixcord<y_axis&&y_axis<sevencord)
+        Showimage();
+        else if(firstcord<x_axis&&x_axis<secndcord&&sixcord<y_axis&&y_axis<sevencord)
+            Showimage();
+        else if (secndcord<x_axis&&x_axis<forthcord&&sixcord<y_axis&&y_axis<sevencord)
+    Showimage();
+        else if (thirdcord<x_axis&&x_axis<firstcord&&sevencord<y_axis&&y_axis<eightcord)
+    Showimage();
+        else  if (firstcord<x_axis&&x_axis<secndcord&&sevencord<y_axis&&y_axis<eightcord)
+    Showimage();
+        else if(secndcord<x_axis&&x_axis<forthcord&&sevencord<y_axis&&y_axis<eightcord)
+    Showimage();
+
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        float x = ev.getX();
-        float y = ev.getY();
 
+        switch (ev.getAction())
+        {
+            case MotionEvent.ACTION_DOWN://avc
+                x_axis = ev.getX();
+
+                y_axis = ev.getY();
+                break;
+        }
+
+        invalidate();
         return true;
     }
+
+    public void Showimage()
+    {
+        Bitmap mFinalbitmap= BitmapFactory.decodeResource(getResources(), R.drawable.cross);
+       mFinalbitmap = Bitmap.createScaledBitmap(mFinalbitmap, width, height, false);
+        canvas1.drawBitmap(mFinalbitmap, thirdcord, fifthcord, null);
+    }
+
 }
