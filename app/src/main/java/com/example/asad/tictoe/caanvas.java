@@ -49,6 +49,8 @@ public class caanvas extends View {
         sixcord = h / 2.46f;
         sevencord = h / 1.63f;
         eightcord = h / 1.28f;
+        width = (int) (firstcord - (thirdcord + 25));
+        height = (int) (sixcord - (fifthcord + 25));
     }
 
     @Override
@@ -100,8 +102,6 @@ public class caanvas extends View {
         if (thirdcord < x_axis && x_axis < firstcord && fifthcord < y_axis && y_axis < sixcord)//For A11 Box
         {
             arr[0] = 1;
-            width = (int) (firstcord - thirdcord + 5);
-            height = (int) (sixcord - fifthcord + 5);
             Place_Images_In_Boxes();
 
         } else if (firstcord < x_axis && x_axis < secndcord && fifthcord < y_axis && y_axis < sixcord) {
