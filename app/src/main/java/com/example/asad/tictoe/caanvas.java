@@ -18,10 +18,11 @@ import android.widget.Toast;
 /**
  * Created by asad on 5/25/16.
  */
-public class caanvas extends View {
+public class caanvas extends View  {
 public Canvas canvas1=new Canvas();
     public float x_axis,y_axis;
     int height,width;
+    Bitmap mFinalbitmap= BitmapFactory.decodeResource(getResources(), R.drawable.cross);
 
    public  float firstcord=0f,secndcord=0f,thirdcord=0f,forthcord=0f,fifthcord=0f,sixcord=0f,sevencord=0f,eightcord=0f;
     public float widthborder=0f;
@@ -45,6 +46,7 @@ public Canvas canvas1=new Canvas();
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas1=canvas;
+        canvas.save();
         Paint paint = new Paint();
         paint.setColor(Color.LTGRAY);
         paint.setStrokeWidth(widthborder);
@@ -60,45 +62,52 @@ public Canvas canvas1=new Canvas();
          Showimage();
         }
         else if(firstcord<x_axis&&x_axis<secndcord&&fifthcord<y_axis&&y_axis<sixcord)
-    Showimage();
-        else if(secndcord<x_axis&&x_axis<forthcord&&fifthcord<y_axis&&y_axis<sixcord)
-    Showimage();
-        else if(thirdcord<x_axis&&x_axis<firstcord&&sixcord<y_axis&&y_axis<sevencord)
-        Showimage();
-        else if(firstcord<x_axis&&x_axis<secndcord&&sixcord<y_axis&&y_axis<sevencord)
-            Showimage();
-        else if (secndcord<x_axis&&x_axis<forthcord&&sixcord<y_axis&&y_axis<sevencord)
-    Showimage();
-        else if (thirdcord<x_axis&&x_axis<firstcord&&sevencord<y_axis&&y_axis<eightcord)
-    Showimage();
-        else  if (firstcord<x_axis&&x_axis<secndcord&&sevencord<y_axis&&y_axis<eightcord)
-    Showimage();
-        else if(secndcord<x_axis&&x_axis<forthcord&&sevencord<y_axis&&y_axis<eightcord)
-    Showimage();
+    Showimage2();
+        //else if(secndcord<x_axis&&x_axis<forthcord&&fifthcord<y_axis&&y_axis<sixcord)
+   // Showimage();
+       // else if(thirdcord<x_axis&&x_axis<firstcord&&sixcord<y_axis&&y_axis<sevencord)
+       // Showimage();
+        //else if(firstcord<x_axis&&x_axis<secndcord&&sixcord<y_axis&&y_axis<sevencord)
+         //   Showimage();
+       // else if (secndcord<x_axis&&x_axis<forthcord&&sixcord<y_axis&&y_axis<sevencord)
+     //Showimage();
+        //else if (thirdcord<x_axis&&x_axis<firstcord&&sevencord<y_axis&&y_axis<eightcord)
+   // Showimage();
+        //else  if (firstcord<x_axis&&x_axis<secndcord&&sevencord<y_axis&&y_axis<eightcord)
+    //Showimage();
+      //  else if(secndcord<x_axis&&x_axis<forthcord&&sevencord<y_axis&&y_axis<eightcord)
+  //  Showimage();
 
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-
+        x_axis = ev.getX();
+        y_axis = ev.getY();
+        Log.i("Tag","Rana asad");
         switch (ev.getAction())
         {
             case MotionEvent.ACTION_DOWN://avc
-                x_axis = ev.getX();
 
-                y_axis = ev.getY();
+                ;
+                invalidate();
                 break;
         }
 
-        invalidate();
+
         return true;
     }
 
     public void Showimage()
     {
-        Bitmap mFinalbitmap= BitmapFactory.decodeResource(getResources(), R.drawable.cross);
+
        mFinalbitmap = Bitmap.createScaledBitmap(mFinalbitmap, width, height, false);
         canvas1.drawBitmap(mFinalbitmap, thirdcord, fifthcord, null);
+    }
+    public  void Showimage2()
+    {
+        mFinalbitmap = Bitmap.createScaledBitmap(mFinalbitmap, width, height, false);
+        canvas1.drawBitmap(mFinalbitmap, firstcord, fifthcord, null);
     }
 
 }
