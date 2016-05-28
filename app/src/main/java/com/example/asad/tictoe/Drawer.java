@@ -18,26 +18,26 @@ import android.widget.Toast;
 /**
  * Created by asad on 5/25/16.
  */
-public class caanvas extends View {
+public class Drawer extends View {
     public Canvas canvas1 = new Canvas();
     public float x_axis, y_axis;
     int height, width;
     Bitmap mFinalbitmap = BitmapFactory.decodeResource(getResources(), R.drawable.cross);
     public int[] arr = new int[9];
+private Controller controller=new Controller();
+    public float firstcord = 0f;
+    public float secndcord = 0f;
+    public float thirdcord = 0f;
+    public float forthcord = 0f;
+    public float fifthcord = 0f;
+    public float sixcord = 0f;
+    public float sevencord = 0f;
+    public float eightcord = 0f;
+    public float widthborder = 0f;
+    public float h = getContext().getResources().getDisplayMetrics().heightPixels;
+    public float w = getContext().getResources().getDisplayMetrics().widthPixels;
 
-    private float firstcord = 0f;
-    private float secndcord = 0f;
-    private float thirdcord = 0f;
-    private float forthcord = 0f;
-    private float fifthcord = 0f;
-    private float sixcord = 0f;
-    private float sevencord = 0f;
-    private float eightcord = 0f;
-    private float widthborder = 0f;
-    private float h = getContext().getResources().getDisplayMetrics().heightPixels;
-    private float w = getContext().getResources().getDisplayMetrics().widthPixels;
-
-    public caanvas(Context context) {
+    public Drawer(Context context) {
         super(context);
 
         widthborder = w / 72f;
@@ -65,7 +65,7 @@ public class caanvas extends View {
         canvas.drawLine(secndcord, fifthcord, secndcord, eightcord, paint);
         canvas.drawLine(thirdcord, sixcord, forthcord, sixcord, paint);
         canvas.drawLine(thirdcord, sevencord, forthcord, sevencord, paint);
-        Boxtrack();
+      Place_Images_In_Boxes();
 
 
     }
@@ -77,7 +77,7 @@ public class caanvas extends View {
         Log.i("Tag", "Rana asad");
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN://avc
-
+                controller.Boxtrack(x_axis,y_axis);
                 invalidate();
                 break;
         }
@@ -86,44 +86,18 @@ public class caanvas extends View {
         return true;
     }
 
-    public void Showimage() {
+    public void ShowimageA11() {
 
         mFinalbitmap = Bitmap.createScaledBitmap(mFinalbitmap, width, height, false);
         canvas1.drawBitmap(mFinalbitmap, thirdcord, fifthcord, null);
     }
 
-    public void Showimage2() {
+    public void ShowimageA12() {
         mFinalbitmap = Bitmap.createScaledBitmap(mFinalbitmap, width, height, false);
-        canvas1.drawBitmap(mFinalbitmap, firstcord, fifthcord, null);
+        canvas1.drawBitmap(mFinalbitmap, (firstcord+25), fifthcord, null);
     }
 
-    public void Boxtrack()//This give the value to array e.g if first box is touch then arr[0]=1
-    {
-        if (thirdcord < x_axis && x_axis < firstcord && fifthcord < y_axis && y_axis < sixcord)//For A11 Box
-        {
-            arr[0] = 1;
-            Place_Images_In_Boxes();
 
-        } else if (firstcord < x_axis && x_axis < secndcord && fifthcord < y_axis && y_axis < sixcord) {
-            arr[1] = 2;
-            Place_Images_In_Boxes();
-        } else if (secndcord < x_axis && x_axis < forthcord && fifthcord < y_axis && y_axis < sixcord)
-            arr[2] = 3;
-        else if (thirdcord < x_axis && x_axis < firstcord && sixcord < y_axis && y_axis < sevencord)
-            arr[3] = 4;
-        else if (firstcord < x_axis && x_axis < secndcord && sixcord < y_axis && y_axis < sevencord)
-            arr[4] = 5;
-        else if (secndcord < x_axis && x_axis < forthcord && sixcord < y_axis && y_axis < sevencord)
-            arr[5] = 6;
-        else if (thirdcord < x_axis && x_axis < firstcord && sevencord < y_axis && y_axis < eightcord)
-            arr[6] = 7;
-        else if (firstcord < x_axis && x_axis < secndcord && sevencord < y_axis && y_axis < eightcord)
-            arr[7] = 8;
-        else if (secndcord < x_axis && x_axis < forthcord && sevencord < y_axis && y_axis < eightcord)
-            arr[8] = 9;
-
-
-    }
 
     public void Place_Images_In_Boxes()//This check the which box is touched and which is not and fill the touched boxes with image
     {
@@ -131,10 +105,10 @@ public class caanvas extends View {
         for (int arrtem : arr) {
             switch (arrtem) {
                 case 1:
-                    Showimage();
+                    ShowimageA11();
                     break;
                 case 2:
-                    Showimage2();
+                    ShowimageA12();
                     break;
             }
 
