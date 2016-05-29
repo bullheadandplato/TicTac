@@ -17,8 +17,11 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Controller controller=new Controller();
-        final Drawer Gameshow=new Drawer(this);
+       final
+       Drawer Gameshow=new Drawer(this);
         controller.Accept_Drawer_Class_Instance(Gameshow);
+
+
         Button playbtn=(Button)findViewById(R.id.button1);
 
 playbtn.setOnClickListener(new View.OnClickListener() {
