@@ -22,10 +22,13 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         root= FXMLLoader.load(Main.class.getResource("StartView.fxml"));
-        Scene scene=new Scene(root,400,400);
+        Scene scene=new Scene(root,400,500);
         stage.setScene(scene);
         stage.setTitle("Tic Tac");
         stage.show();
+        stage.setOnCloseRequest(event->{
+            System.exit(0);
+        });
     }
     public static void changeScene() throws IOException{
         root=FXMLLoader.load(Main.class.getResource("GameView.fxml"));

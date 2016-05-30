@@ -84,8 +84,22 @@ public class ServerThread extends Thread {
                 for (Socket a:
                      busyClients) {
                     if(a==socket){
-                        busyClients.remove(i);
-                        clientNames.remove(socket);
+                        for (GamePlay player:
+                             onGoingMatches) {
+                            if(player.player2==socket){
+                                player.writePlayerQuit(socket);
+                                busyClients.remove(player.player1);
+                                busyClients.remove(player.player2);
+                                clientNames.remove(player.player2);
+                                connectedClients.add(player.player1);
+                            }else if(player.player1==socket){
+                                player.writePlayerQuit(socket);
+                                busyClients.remove(player.player2);
+                                busyClients.remove(player.player1);
+                                clientNames.remove(player.player2);
+                                connectedClients.add(player.player2);
+                            }
+                        }
                         System.out.println("Client remove");
                         break;
                     }
@@ -122,6 +136,9 @@ public class ServerThread extends Thread {
 
         }
 
+
+    }
+    private void removeClients(){
 
     }
 

@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -48,6 +49,7 @@ public class GameViewController implements Initializable {
     public static String player1Name;
     public volatile static String player2Name;
     private int playerID=0;
+    Alert quit;
 
     public void setPlayerID(int playerID) {
         this.playerID = playerID;
@@ -62,11 +64,13 @@ public class GameViewController implements Initializable {
         controller=new UIController(this);
         restart.setText("Restart");
         startGame();
-
-
+        //create alerts to show when needed;
+        createAlerts();
     }
 
     public void setStatus(int player){
+        playerText2.setVisible(false);
+        playerText1.setVisible(false);
         whichPlayer.setText("Game Over");
         if(player==1){
             winner.setText("Winner: "+player1Name);
@@ -94,13 +98,8 @@ public class GameViewController implements Initializable {
         if(winner.getText().length()>0){
             winner.setText("");
         }
-        if(controller!=null){
-            controller.clearGameDrawing();
-        }
-
         restart.setVisible(false);
         canvas = controller.drawGame();
-        box.getChildren().clear();
         box.getChildren().addAll(canvas);
         canvas.setOnMouseClicked(event -> {
             Platform.runLater(() -> {
@@ -121,7 +120,9 @@ public class GameViewController implements Initializable {
 
 
     }
-    public void setEnable(){
+    public  void  setEnable(){
+        System.out.println("SETTING BOX VISIBLE");
+        whichPlayer.setVisible(false);
         box.setVisible(true);
     }
 
@@ -137,5 +138,16 @@ public class GameViewController implements Initializable {
             playerText1.setVisible(false);
             playerText2.setVisible(true);
         }
+    }
+    private void createAlerts(){
+        quit=new Alert(Alert.AlertType.INFORMATION);
+        quit.setHeaderText("Other Quit");
+        quit.setContentText("Other player quit.");
+
+    }
+    public void showAlert(){
+        whichPlayer.setVisible(true);
+        box.setVisible(false);
+        quit.showAndWait();
     }
 }

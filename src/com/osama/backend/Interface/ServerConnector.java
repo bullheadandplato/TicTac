@@ -16,13 +16,19 @@ public class ServerConnector extends Thread implements ServerOperations{
     DataOutputStream bw;
     UIController aController;
 
+    /**
+     * It will set the controller class instance
+     * because I have to callback some methods.
+     * @param a is the instance of controller
+     */
     public void setaController(UIController a) {
         aController=a;
     }
 
-    public ServerConnector(){
-
-    }
+    /**
+     * Connect to server by calling this method
+     * @return true if connection is established.
+     */
     @Override
     public boolean createConnection() {
         try {
@@ -40,6 +46,11 @@ public class ServerConnector extends Thread implements ServerOperations{
 
     }
 
+    /**
+     * Ask server to arrangeMatch this is called whenever a user connect to server
+     * It is necessary for user to call this method
+     * @return
+     */
     @Override
     public int arrangeMatch() {
         try {
@@ -50,6 +61,13 @@ public class ServerConnector extends Thread implements ServerOperations{
         return 0;
     }
 
+    /**
+     * When a user click any box this method is called to draw move on the other side.
+     * i.e If player one clicks this method will tell the server to draw one the player two
+     * game.
+     * @param box is the number of box which player clicks
+     * @return true if move successfully drawn
+     */
     @Override
     public boolean drawMove(int box) {
         try {
@@ -60,6 +78,10 @@ public class ServerConnector extends Thread implements ServerOperations{
         return false;
     }
 
+    /**
+     *
+     * @param winBoxes
+     */
     @Override
     public void wins(int[] winBoxes) {
         try {
@@ -90,11 +112,9 @@ public class ServerConnector extends Thread implements ServerOperations{
             while (true){
                 String command=br.readUTF();
                 if(command.startsWith("wins")){
-                    System.out.println("The whole world is destroyed");
                     aController.wins(Integer.parseInt(command.substring(4,command.length())));
                 }
                 if(command.startsWith("name")){
-                    System.out.println("Run name 123: "+command);
                     GameViewController.player2Name=command.substring(4,command.length());
 
                 }
@@ -107,10 +127,12 @@ public class ServerConnector extends Thread implements ServerOperations{
                     aController.drawBox(box);
                 }
                 if(command.startsWith("player")){
-                    System.out.println("Command length is "+command.length());
                     int player=Integer.parseInt(command.substring(6,command.length()));
-                    System.out.println("Got in player sets in ServerConnector");
                     aController.setPlayer(player);
+                }
+                if(command.startsWith("quit")){
+                    System.out.println("Google hss to quit this");
+                    aController.otherPlayerQuit();
                 }
 
             }

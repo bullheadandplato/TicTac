@@ -19,15 +19,15 @@ public class UIController {
     private static final int Box2X = 130;
     private static final int Box3X = 190;
     private int player = 1;
-    ServerConnector server;
+    private ServerConnector server;
     private boolean notWinner=true;
     private Drawer drawer;
     private int index = 0;
     private GameViewController manageInterface;
-    private AtomicBoolean gameStatus;
+    private Boolean gameStatus;
 
     public void setGameStatus(boolean gameStatus) {
-        this.gameStatus.set(gameStatus);
+        this.gameStatus=gameStatus;
         check();
     }
 
@@ -38,14 +38,14 @@ public class UIController {
     }
 
     private void check() {
-        if(gameStatus.get()){
+        System.out.println("This method called and game status is"+gameStatus);
+        if(gameStatus){
             manageInterface.setEnable();
         }
     }
 
     public UIController(GameViewController a){
-        gameStatus=new AtomicBoolean();
-        gameStatus.set(false);
+        gameStatus=false;
         manageInterface=a;
         server=new ServerConnector();
         server.createConnection();
@@ -272,5 +272,9 @@ public class UIController {
         drawer.drawWinLine(temp);
         //display winner name on screen
         manageInterface.setStatus(getWinner());
+    }
+    public void otherPlayerQuit(){
+
+            manageInterface.showAlert();
     }
 }

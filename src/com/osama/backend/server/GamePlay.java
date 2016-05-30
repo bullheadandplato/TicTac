@@ -69,12 +69,27 @@ public class GamePlay {
         try{
             bw1.writeUTF("player"+player1id);
             bw2.writeUTF("player"+player2id);
-            System.out.println("Writing player ids");
 
         }catch (IOException e){
             e.printStackTrace();
         }
 
+    }
+    public void writePlayerQuit(Socket player){
+        if(player==player1){
+            try {
+                bw2.writeUTF("quit");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if(player==player2){
+            try {
+                bw1.writeUTF("quit");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }

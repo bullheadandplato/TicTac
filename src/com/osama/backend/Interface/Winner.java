@@ -41,12 +41,10 @@ public class Winner {
         if (index > 2 || index1>2) {
 
             for ( int[] a : WIN ) {
-                System.out.println("Player: ");
 
                 int winCount = 0;
                     for (int i = 0; i < p.length; i++) {
                         for (int j = 0; j < a.length; j++) {
-                            System.out.println("Arrays value are: "+p[j]);
                             if (p[i] == a[j]) {
                                 winBoxes[j]=a[j];
                                 winCount++;
