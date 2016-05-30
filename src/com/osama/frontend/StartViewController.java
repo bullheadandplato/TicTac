@@ -1,5 +1,6 @@
 package com.osama.frontend;
 
+import com.osama.backend.Interface.Constants;
 import com.osama.backend.Interface.ServerConnector;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,6 +20,8 @@ public class StartViewController implements Initializable {
     public TextField player1Name;
     @FXML
             private Text error;
+    @FXML
+            private TextField serverIP;
 
     Main obj=new Main();
     @Override
@@ -27,9 +30,10 @@ public class StartViewController implements Initializable {
     }
 
     public void startGame(ActionEvent actionEvent) {
-            if (player1Name.getText().length() > 0 ) {
+            if (player1Name.getText().length() > 0 && serverIP.getText().length()>0) {
                 GameViewController.player1Name = player1Name.getText();
-
+                //Will define regex for server ip later TODO
+                Constants.ServerIP=serverIP.getText();
                 try {
                     obj.changeScene();
                 } catch (IOException e) {

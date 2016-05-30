@@ -23,6 +23,11 @@
         <URL value="@/Stylesheets/StartStyle.css"/>
     </stylesheets>
     <children>
+        <HBox spacing="10"
+              alignment="CENTER">
+            <Label text="Server IP"/>
+            <TextField fx:id="serverIP"/>
+        </HBox>
             <HBox spacing="10"
                   alignment="CENTER"
             >

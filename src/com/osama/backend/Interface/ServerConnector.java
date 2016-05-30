@@ -16,6 +16,7 @@ public class ServerConnector extends Thread implements ServerOperations{
     DataOutputStream bw;
     UIController aController;
 
+
     /**
      * It will set the controller class instance
      * because I have to callback some methods.
@@ -32,7 +33,7 @@ public class ServerConnector extends Thread implements ServerOperations{
     @Override
     public boolean createConnection() {
         try {
-            s=new Socket("127.0.0.1",5001);
+            s=new Socket(Constants.ServerIP,5001);
             br=new DataInputStream(s.getInputStream());
             bw=new DataOutputStream(s.getOutputStream());
             //tell the server who you are
