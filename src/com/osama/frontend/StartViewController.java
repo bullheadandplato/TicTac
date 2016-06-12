@@ -30,8 +30,11 @@ public class StartViewController implements Initializable {
     }
 
     public void startGame(ActionEvent actionEvent) {
-            if (player1Name.getText().length() > 0 && serverIP.getText().length()>0) {
-                GameViewController.player1Name = player1Name.getText();
+        if(serverIP.getText().length()<=0){
+            serverIP.setText("169.254.215.65");
+        }
+            if (player1Name.getText().length() > 0 ) {
+                Constants.player1Name = player1Name.getText();
                 //Will define regex for server ip later TODO
                 Constants.ServerIP=serverIP.getText();
                 try {

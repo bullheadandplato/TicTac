@@ -31,13 +31,13 @@ public class ServerConnector extends Thread implements ServerOperations{
      * @return true if connection is established.
      */
     @Override
-    public boolean createConnection() {
+    public boolean createConnectionStart() {
         try {
             s=new Socket(Constants.ServerIP,5001);
             br=new DataInputStream(s.getInputStream());
             bw=new DataOutputStream(s.getOutputStream());
             //tell the server who you are
-            bw.writeUTF(GameViewController.player1Name);
+            bw.writeUTF(Constants.player1Name);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -45,6 +45,21 @@ public class ServerConnector extends Thread implements ServerOperations{
         start();
         return false;
 
+    }
+
+    @Override
+    public boolean createConnection() {
+        try {
+            s=new Socket(Constants.ServerIP,5001);
+            br=new DataInputStream(s.getInputStream());
+            bw=new DataOutputStream(s.getOutputStream());
+            //tell the server who you are
+            bw.writeUTF(Constants.player1Name);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     /**
@@ -108,38 +123,82 @@ public class ServerConnector extends Thread implements ServerOperations{
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void reMatch() {
+        try {
+            bw.writeUTF("rematch");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void startMatchAgain() {
+        try {
+            bw.writeUTF("startmatchagain");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void run(){
         try{
             while (true){
                 String command=br.readUTF();
                 if(command.startsWith("wins")){
-                    aController.wins(Integer.parseInt(command.substring(4,command.length())));
+                    Platform.runLater(()->{
+                        aController.wins(Integer.parseInt(command.substring(4,command.length())));
+                    });
                 }
                 if(command.startsWith("name")){
-                    GameViewController.player2Name=command.substring(4,command.length());
+
+                            Constants.player2Name=command.substring(4,command.length());
+
 
                 }
                 if(command.startsWith("match")){
-                   aController.setGameStatus(true);
-                    
+                    Platform.runLater(()->{
+                        aController.setGameStatus(true);
+                    });
+
                 }
                 if(command.startsWith("move")){
                     int box=Integer.parseInt(command.substring(4,command.length()));
-                    aController.drawBox(box);
+                    Platform.runLater(()->{
+                        aController.drawBox(box);
+
+                    });
                 }
                 if(command.startsWith("player")){
                     int player=Integer.parseInt(command.substring(6,command.length()));
-                    aController.setPlayer(player);
+                    Platform.runLater(()->{
+                        aController.setPlayer(player);
+                    });
                 }
                 if(command.startsWith("quit")){
-                    System.out.println("Google hss to quit this");
-                    aController.otherPlayerQuit();
+                    Platform.runLater(()->{
+                        aController.otherPlayerQuit();
+                    });
+                }
+                if (command.startsWith("rematch")){
+                    Platform.runLater(()->{
+                        aController.reMatch();
+
+                    });
                 }
 
             }
 
         }catch (Exception e){
 
+        }
+    }
+    public void closeConnection(){
+        try {
+            s.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

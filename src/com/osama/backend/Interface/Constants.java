@@ -5,4 +5,6 @@ package com.osama.backend.Interface;
  */
 public class Constants {
     public static  String ServerIP;
+    public static String player1Name;
+    public static String player2Name;
 }

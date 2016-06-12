@@ -24,9 +24,6 @@ public class GamePlay {
         try{
            bw1=new DataOutputStream(player1.getOutputStream());
             bw2=new DataOutputStream(player2.getOutputStream());
-            bw2.writeUTF("match");
-            bw1.writeUTF("match");
-            setPlayerIDs();
 
 
         }catch (IOException e){
@@ -37,13 +34,10 @@ public class GamePlay {
     public void move(int box,Socket player){
             try {
                 if(player==player1) {
-                    System.out.println("Carry on ");
-
                     bw2.writeUTF("move"+box);
                 }
                 else if(player==player2){
                     bw1.writeUTF("move"+box);
-                    System.out.println("Carry on 2");
 
                 }
             } catch (IOException e) {
@@ -64,8 +58,15 @@ public class GamePlay {
         }
     }
     public void setPlayerIDs(){
-        player1id=1;
-        player2id=2;
+        if(player1id==1){
+            player1id=2;
+            player2id=1;
+        }
+        else{
+            player1id=1;
+            player2id=2;
+        }
+
         try{
             bw1.writeUTF("player"+player1id);
             bw2.writeUTF("player"+player2id);
@@ -91,5 +92,48 @@ public class GamePlay {
             }
         }
     }
+    public void startMatch(){
+        try{            setPlayerIDs();
 
+            bw2.writeUTF("match");
+            bw1.writeUTF("match");
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+    public void writeName(String name, Socket player){
+        if(player==player1)
+            try {
+                bw2.writeUTF("name"+name);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        else if(player==player2){
+            try {
+                bw1.writeUTF("name"+name);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void reMatch(Socket player1) {
+        if(player1==this.player1){
+            try {
+                bw1.writeUTF("rematch");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else if(player1==player2){
+            try {
+                bw2.writeUTF("rematch");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void startMatchAgain() {
+        startMatch();
+    }
 }

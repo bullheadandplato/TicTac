@@ -25,13 +25,13 @@
     <children>
         <HBox spacing="10"
               alignment="CENTER">
-            <Label text="Server IP"/>
+            <Label text="Server IP:  "/>
             <TextField fx:id="serverIP"/>
         </HBox>
             <HBox spacing="10"
                   alignment="CENTER"
             >
-                <Label text="Your Name: "
+                <Label text="Your Name:"
                 />
                 <TextField fx:id="player1Name"
 

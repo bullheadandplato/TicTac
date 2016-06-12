@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -25,6 +26,7 @@ public class Main extends Application {
         Scene scene=new Scene(root,400,500);
         stage.setScene(scene);
         stage.setTitle("Tic Tac");
+        stage.setResizable(false);
         stage.show();
         stage.setOnCloseRequest(event->{
             System.exit(0);
@@ -35,6 +37,7 @@ public class Main extends Application {
         stage.getScene().setRoot(root);
     }
     public static void main(String[] args){
+
         launch(args);
     }
 }

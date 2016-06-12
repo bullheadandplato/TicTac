@@ -66,7 +66,26 @@ public class ServerThread extends Thread {
                             }
                         }
                     }
-
+                else if(command.startsWith("rematch")){
+                        for (GamePlay player:
+                             onGoingMatches) {
+                            if(player.player1==socket){
+                                player.reMatch(player.player2);
+                            }else if(player.player2==socket){
+                                player.reMatch(player.player1);
+                            }
+                        }
+                    }
+                else if(command.startsWith("startmatchagain")){
+                        for (GamePlay pl :
+                                onGoingMatches) {
+                            if (pl.player1==socket){
+                                pl.startMatchAgain();
+                            }else if(pl.player2==socket){
+                                pl.startMatchAgain();
+                            }
+                        }
+                    }
                 }
         }catch (Exception e){
             int i=0;
@@ -92,12 +111,18 @@ public class ServerThread extends Thread {
                                 busyClients.remove(player.player2);
                                 clientNames.remove(player.player2);
                                 connectedClients.add(player.player1);
+                                onGoingMatches.remove(player);
+                                player=null;
+                                break;
                             }else if(player.player1==socket){
                                 player.writePlayerQuit(socket);
                                 busyClients.remove(player.player2);
                                 busyClients.remove(player.player1);
                                 clientNames.remove(player.player2);
                                 connectedClients.add(player.player2);
+                                onGoingMatches.remove(player);
+                                player=null;
+                                break;
                             }
                         }
                         System.out.println("Client remove");
@@ -118,28 +143,15 @@ public class ServerThread extends Thread {
             Socket b = connectedClients.get(two);
             busyClients.add(b);
             connectedClients.remove(two);
-            GamePlay abc=new GamePlay(a,b);
-            onGoingMatches.add(abc);
-            //write names of each other
-           try {
-                DataOutputStream temp=new DataOutputStream(a.getOutputStream());
-                temp.writeUTF("name"+clientNames.get(b));
-                temp=null;
-                temp=new DataOutputStream(b.getOutputStream());
-                temp.writeUTF("name"+clientNames.get(a));
-
-               temp=null;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
+                GamePlay abc=new GamePlay(a,b);
+                onGoingMatches.add(abc);
+            abc.writeName(clientNames.get(a),a);
+            abc.writeName(clientNames.get(b),b);
+            abc.startMatch();
         }
 
 
     }
-    private void removeClients(){
 
-    }
 
 }
