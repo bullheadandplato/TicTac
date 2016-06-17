@@ -1,0 +1,51 @@
+#yesbtn{
+    -fx-background-color: green;
+    -fx-background-radius: 30px;
+    -fx-border-radius: 30px;
+    -fx-border-style: dotted;
+    -fx-border-color: darkgray;
+    -fx-text-fill: whitesmoke;
+    -fx-font-size: 14px;
+}
+#yesbtn:hover{
+    -fx-font-weight: bold;
+    -fx-background-color: whitesmoke;
+    -fx-text-fill: green;
+}
+#nobtn{
+    -fx-text-fill: whitesmoke;
+    -fx-font-size: 14px;
+    -fx-background-radius: 30px;
+    -fx-border-style: dotted;
+    -fx-border-radius: 30px;
+    -fx-background-color: red;
+    -fx-border-color: burlywood;
+}
+
+#nobtn:hover{
+    -fx-font-weight: bold;
+    -fx-background-color: whitesmoke;
+    -fx-text-fill: red;
+}
+.label{
+    -fx-text-fill: coral;
+    -fx-font-size: 16px;
+    -fx-font-style: italic;
+}
+#footer{
+    -fx-background-color: burlywood;
+    -fx-background-radius: 30px;
+
+}
+#backbtn{
+    -fx-border-color: green;
+    -fx-border-style: solid;
+    -fx-border-width: 2px;
+    -fx-background-color: whitesmoke;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+}
+.redBack{
+    -fx-background-color: red;
+    -fx-fill: red;
+}
