@@ -99,7 +99,7 @@ public Drawer(){
                 graphicsContext.strokeLine(10,10,170,10);
             }
         else if(winBoxes[0]==3 && winBoxes[2]==5){
-                graphicsContext.strokeLine(10,60,170,60);
+                graphicsContext.strokeLine(10,80,170,80);
             }
         else if(winBoxes[0]==6 && winBoxes[2]==8){
                 graphicsContext.strokeLine(10,165,170,165);

@@ -2,11 +2,17 @@ package com.osama.frontend;
 
 import com.osama.backend.Interface.*;
 import com.sun.javafx.tk.Toolkit;
+import javafx.animation.FadeTransition;
+import javafx.animation.Interpolator;
+import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -16,6 +22,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 
 import javax.swing.*;
@@ -80,21 +87,29 @@ public class GameViewController implements Initializable {
             }
 
     public void setStatus(int player){
+        whichPlayer.setVisible(true);
         whichPlayer.setTextFill(Color.RED);
         whichPlayer.setText("Game Over");
+        winner.setVisible(true);
         if(player==1){
             winner.setText("Winner: "+ Constants.player1Name);
             playerText1.setText("You Win :)");
+            animateNodebyFade(box);
+            animateNodeByScale(playerText1);
             win++;
             winCount.setText(win+"/"+totalGames);
+            changeMatchcount(winCount);
         }
 
         else if(player==2){
             winner.setText("Winner: "+Constants.player2Name);
             playerText1.setText("You lose :(");
+            animateNodebyFade(box);
+            animateNodeByScale(playerText1);
         }
         else{
             winner.setText("Draw");
+            playerText1.setVisible(false);
         }
         restart.setVisible(true);
 
@@ -107,10 +122,11 @@ public class GameViewController implements Initializable {
         this.canvas=null;
         playerText1.setVisible(false);
         whichPlayer.setVisible(true);
-        startGame();
+
     }
 
     public void startGame(){
+        whichPlayer.setVisible(true);
         if(winner.getText().length()>0){
             winner.setText("");
         }
@@ -127,6 +143,7 @@ public class GameViewController implements Initializable {
                     setStatus(controller.getWinner());
                 }
                 else if(controller.getIndex()==9){
+                    controller.matchDraw();
                     setStatus(0);
                 }
 
@@ -174,6 +191,10 @@ public class GameViewController implements Initializable {
     }
     public void showAlert(){
         box.setVisible(false);
+        whichPlayer.setText("Waiting for someone to connect");
+        whichPlayer.setTextFill(Color.DARKSALMON);
+        restart.setVisible(false);
+        winner.setVisible(false);
         quit.showAndWait();
         clearEverything();
     }
@@ -182,6 +203,16 @@ public class GameViewController implements Initializable {
     public void reMatch() {
         clearEverything();
         controller.writeRematch();
+        Alert x=new Alert(Alert.AlertType.INFORMATION);
+        x.setContentText("Waiting for other player response");
+        x.setHeaderText("waiting for response");
+        x.showAndWait();
+        if(x.getResult()==ButtonType.OK){
+            restart.setVisible(false);
+            winner.setVisible(false);
+            cancelTransationEffectsScale(playerText1);
+            cancelTransationEffectsFade(box);
+        }
 
     }
 
@@ -200,6 +231,9 @@ public class GameViewController implements Initializable {
         if(abc.getResult()== ButtonType.OK){
             clearEverything();
             controller.startReMatch();
+            cancelTransationEffectsScale(playerText1);
+            cancelTransationEffectsFade(box);
+
         }
         else {
             System.out.println("Google is okay");
@@ -213,5 +247,58 @@ public class GameViewController implements Initializable {
 
     public void changePlayer(ActionEvent actionEvent) {
 
+    }
+
+
+    public void alertServerDown() {
+        Alert x=new Alert(Alert.AlertType.INFORMATION);
+        x.setContentText("Server shut down");
+        x.setHeaderText("Server down");
+        x.showAndWait();
+        try {
+            Main.changeScene("preStart.fxml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void animateNodebyFade(Node a){
+        FadeTransition  x=new FadeTransition(new Duration(1500),a);
+        x.setFromValue(100);
+        x.setToValue(0);
+        x.setCycleCount(1);
+        x.play();
+
+
+    }
+    private void animateNodeByScale(Node a){
+        ScaleTransition y=new ScaleTransition(new Duration(1500),a);
+        y.setToX(5);
+        y.setToY(5);
+        y.setCycleCount(1);
+        y.play();
+    }
+    private void cancelTransationEffectsScale(Node a){
+        ScaleTransition x=new ScaleTransition(new Duration(500),a);
+        x.setToY(1);
+        x.setToX(1);
+        x.setCycleCount(1);
+        x.play();
+    }
+    private void cancelTransationEffectsFade(Node a){
+        FadeTransition  x=new FadeTransition(new Duration(800),a);
+        x.setFromValue(0);
+        x.setToValue(100);
+        x.setCycleCount(1);
+        x.play();
+
+    }
+    private void changeMatchcount(Node a){
+        ScaleTransition x=new ScaleTransition(new Duration(1000),a);
+        x.setFromX(5);
+        x.setFromY(5);
+        x.setToX(1);
+        x.setToY(1);
+        x.setCycleCount(1);
+        x.play();
     }
 }

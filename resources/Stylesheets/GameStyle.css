@@ -1,4 +1,23 @@
 .label{
-    -fx-font-size: 20;
-    -fx-text-fill: darksalmon;
+    -fx-font-size: 14px;
+    -fx-text-fill: crimson;
+}
+.menu{
+    -fx-background-color: whitesmoke; -fx-background-radius: 30px;
+
+}
+.menu-item{
+
+}
+#whichPlayer{
+    -fx-font-size: 20px;
+    -fx-text-fill: coral;
+}
+#statusBox{
+    -fx-background-color: cornsilk;
+    -fx-background-radius: 10px;
+    -fx-border-style: dashed;
+    -fx-border-width: 2px;
+    -fx-border-color: gray;
+    -fx-border-radius: 10px;
 }

@@ -38,7 +38,7 @@ public class StartViewController implements Initializable {
                 //Will define regex for server ip later TODO
                 Constants.ServerIP=serverIP.getText();
                 try {
-                    obj.changeScene();
+                    obj.changeScene("GameView.fxml");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

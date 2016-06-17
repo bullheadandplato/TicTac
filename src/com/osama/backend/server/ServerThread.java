@@ -86,6 +86,16 @@ public class ServerThread extends Thread {
                             }
                         }
                     }
+                else if(command.startsWith("draw")){
+                        for (GamePlay pl :
+                                onGoingMatches) {
+                            if (pl.player1==socket){
+                                pl.writeDraw(pl.player2);
+                            }else if(pl.player2==socket){
+                                pl.writeDraw(pl.player1);
+                            }
+                        }
+                    }
                 }
         }catch (Exception e){
             int i=0;
@@ -118,7 +128,7 @@ public class ServerThread extends Thread {
                                 player.writePlayerQuit(socket);
                                 busyClients.remove(player.player2);
                                 busyClients.remove(player.player1);
-                                clientNames.remove(player.player2);
+                                clientNames.remove(player.player1);
                                 connectedClients.add(player.player2);
                                 onGoingMatches.remove(player);
                                 player=null;
@@ -154,4 +164,11 @@ public class ServerThread extends Thread {
     }
 
 
+    public void writeCloseMessage() {
+        try{
+            bufferedWriter.writeUTF("closing"+"Server is shutting down");
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 }

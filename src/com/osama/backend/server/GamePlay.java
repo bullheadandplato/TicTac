@@ -136,4 +136,20 @@ public class GamePlay {
     public void startMatchAgain() {
         startMatch();
     }
+
+    public void writeDraw(Socket player1) {
+        if(player1==this.player1){
+            try {
+                bw1.writeUTF("draw");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else if(player1==player2){
+            try {
+                bw2.writeUTF("draw");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

@@ -46,6 +46,7 @@ public class UIController {
         manageInterface = a;
         server = new ServerConnector();
         server.createConnectionStart();
+
         server.setaController(this);
         server.arrangeMatch();
         drawer = new Drawer();
@@ -292,20 +293,8 @@ public class UIController {
 
     public void otherPlayerQuit() {
         manageInterface.showAlert();
-        manageInterface.clearEverything();
     }
 
-    public void closeConnection() {
-        server.closeConnection();
-    }
-
-    public void createConnection() {
-        server.createConnection();
-    }
-
-    public void startMatch() {
-        server.arrangeMatch();
-    }
 
     public void writeRematch() {
         server.reMatch();
@@ -317,5 +306,17 @@ public class UIController {
 
     public void startReMatch() {
         server.startMatchAgain();
+    }
+
+    public void serverDown() {
+        manageInterface.alertServerDown();
+    }
+
+    public void matchDraw() {
+        server.writeDraw();
+    }
+
+    public void matchDrawnfromServer() {
+        manageInterface.setStatus(0);
     }
 }

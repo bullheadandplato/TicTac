@@ -40,10 +40,10 @@ public class ServerConnector extends Thread implements ServerOperations{
             bw.writeUTF(Constants.player1Name);
 
         } catch (IOException e) {
-            e.printStackTrace();
+            return false;
         }
         start();
-        return false;
+        return true;
 
     }
 
@@ -187,6 +187,16 @@ public class ServerConnector extends Thread implements ServerOperations{
 
                     });
                 }
+                if(command.startsWith("closing")){
+                    Platform.runLater(()->{
+                        aController.serverDown();
+                    });
+                }
+                if(command.startsWith("draw")){
+                    Platform.runLater(()->{
+                        aController.matchDrawnfromServer();
+                    });
+                }
 
             }
 
@@ -201,5 +211,24 @@ public class ServerConnector extends Thread implements ServerOperations{
             e.printStackTrace();
         }
     }
+    public static boolean serverCheck(){
+        Socket a;
+        try{
+            a=new Socket(Constants.ServerIP,5001);
+            a.close();
+        }catch (IOException e){
+            return false;
+        }finally {
+            a=null;
+        }
+        return true;
+    }
 
+    public void writeDraw() {
+        try{
+            bw.writeUTF("draw");
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 }

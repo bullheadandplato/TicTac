@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<VBox   xmlns="http://javafx.com/javafx/8.0.72" xmlns:fx="http://javafx.com/fxml/1"
+        alignment="CENTER"
+        stylesheets="@/Stylesheets/preStartStyle.css" spacing="20"
+        fx:controller="com.osama.frontend.PreStartController">
+
+  <children>
+      <Button fx:id="single" text="Single player mode" />
+      <Button fx:id="multi" text="Multi player mode"/>
+  </children>
+</VBox>
