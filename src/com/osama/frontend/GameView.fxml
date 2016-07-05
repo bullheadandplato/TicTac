@@ -6,6 +6,9 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -15,84 +18,121 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane stylesheets="@/Stylesheets/GameStyle.css" alignment="TOP_CENTER" xmlns="http://javafx.com/javafx/8.0.72" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.osama.frontend.GameViewController">
+<?import javafx.scene.control.ScrollPane?>
+<SplitPane fx:id="splitPane" dividerPositions="0.5" stylesheets="@/Stylesheets/GameStyle.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.osama.frontend.GameViewController">
+<items>
+    <GridPane fx:id="mainPane" alignment="TOP_CENTER" maxWidth="420" minWidth="420" prefWidth="420">
 
-   <children>
-      <MenuBar prefWidth="400" style="-fx-background-color: burlywood; -fx-background-radius: 30px; -fx-border-color: moccasin;
-      -fx-border-style: dotted; -fx-border-radius: 30px; -fx-border-width: 3px;  " >
-        <menus>
-          <Menu mnemonicParsing="false" text="Options" >
-            <items>
-              <MenuItem style="-fx-font-size: 14px;" mnemonicParsing="false" text="Reset Count" onAction="#resetCount" />
-                <MenuItem style="-fx-font-size: 14px;" text="Change Player Name" onAction="#changePlayer"/>
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem style="-fx-font-size: 14px;" mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem style="-fx-font-size: 14px;" mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
+        <children>
+            <HBox style="-fx-background-color: burlywood; -fx-background-radius: 30px; -fx-border-color: moccasin;       -fx-border-style: dotted; -fx-border-radius: 30px; -fx-border-width: 3px;  ">
+                <MenuBar prefWidth="350" style="-fx-background-color: transparent">
+                    <menus>
+                        <Menu mnemonicParsing="false" text="Options">
+                            <items>
+                                <MenuItem mnemonicParsing="false" onAction="#resetCount" style="-fx-font-size: 14px;" text="End" />
+                                <MenuItem onAction="#exit" style="-fx-font-size: 14px;" text="Exit" />
+                            </items>
+                        </Menu>
 
-      <HBox fx:id="statusBox" GridPane.rowIndex="1" GridPane.columnIndex="0" prefHeight="20.0" prefWidth="249.0" spacing="10.0">
-         <children>
-            <Text fx:id="showPlayerName" strokeType="OUTSIDE" strokeWidth="0.0">
-               <HBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </HBox.margin>
-                <font>
-                    <Font size="22" />
-                </font>
-            </Text>
-            <ImageView fx:id="playerIcon" fitHeight="30" fitWidth="30" pickOnBounds="true" preserveRatio="true">
-                <HBox.margin>
+                        <Menu mnemonicParsing="false" text="Help">
+                            <items>
+                                <MenuItem mnemonicParsing="false" style="-fx-font-size: 14px;" text="About" />
+                            </items>
+                        </Menu>
+                    </menus>
+                </MenuBar>
+                <Button fx:id="chatButton" disable="true" onAction="#openChat" text="Chat" />
+            </HBox>
+
+            <HBox fx:id="statusBox" prefHeight="20.0" prefWidth="249.0" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                <children>
+                    <Text fx:id="showPlayerName" strokeType="OUTSIDE" strokeWidth="0.0">
+                        <HBox.margin>
+                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        </HBox.margin>
+                        <font>
+                            <Font size="22" />
+                        </font>
+                    </Text>
+                    <ImageView fx:id="playerIcon" fitHeight="30" fitWidth="30" pickOnBounds="true" preserveRatio="true">
+                        <HBox.margin>
+                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        </HBox.margin>
+                    </ImageView>
+                    <Text text="Win Count: ">
+                        <HBox.margin>
+                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        </HBox.margin>
+                        <font>
+                            <Font size="22" />
+                        </font>
+                    </Text>
+                    <Text fx:id="winCount">
+                        <HBox.margin>
+                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        </HBox.margin>
+                        <font>
+                            <Font size="20" />
+                        </font>
+                    </Text>
+
+                </children>
+                <padding>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                </HBox.margin>
-            </ImageView>
-             <Text text="Win Count: ">
-                 <HBox.margin>
-                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                 </HBox.margin>
-                 <font>
-                     <Font size="22" />
-                 </font>
-             </Text>
-             <Text fx:id="winCount">
-                 <HBox.margin>
-                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                 </HBox.margin>
-                 <font>
-                     <Font size="20" />
-                 </font>
-             </Text>
+                </padding>
+            </HBox>
+            <VBox fx:id="mainNode" alignment="CENTER" prefHeight="242.0" prefWidth="172.0" spacing="20" GridPane.rowIndex="2">
+                <children>
+                    <Label fx:id="whichPlayer" wrapText="true" />
+                    <Label fx:id="playerText1" text="Your Turn" visible="false" />
+                    <HBox fx:id="box" alignment="CENTER">
+                        <children>
 
-         </children>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-      </HBox>
-       <VBox fx:id="mainNode" alignment="CENTER" prefHeight="242.0" prefWidth="172.0" spacing="20" GridPane.rowIndex="2">
-           <children>
-               <Label fx:id="whichPlayer" wrapText="true" />
-               <Label fx:id="playerText1" text="Your Turn" visible="false" />
-               <HBox fx:id="box" alignment="CENTER">
-                   <children>
+                        </children>
+                    </HBox>
+                    <Text fx:id="winner" style="-fx-fill: dodgerblue">
+                        <font>
+                            <Font size="20" />
+                        </font>
+                    </Text>
+                    <Button fx:id="restart" onAction="#reMatch" />
+                </children>
+            </VBox>
+        </children>
+         <columnConstraints>
+            <ColumnConstraints />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
+    </GridPane>
+    <VBox fx:id="chatBox" alignment="TOP_CENTER" spacing="10" visible="false" HBox.hgrow="ALWAYS">
+        <padding>
+            <Insets left="10" right="10" />
+        </padding>
+        <HBox fx:id="chatTop" alignment="CENTER">
+            <Label fx:id="chatLabel" text="       Chat   " />
+            <Button fx:id="closeChatButton" onAction="#closeChat" style="-fx-background-color: transparent; -fx-text-fill: whitesmoke" text="X" />
+        </HBox>
+        <ScrollPane fx:id="chatList" maxHeight="360" minHeight="380" prefHeight="380" >
+            <VBox fx:id="chatListBox" spacing="10" prefWidth="130">
+                <padding>
+                    <Insets bottom="10" left="10" right="10" top="10" />
+                </padding>
+            </VBox>
 
-                   </children>
-               </HBox>
-               <Text fx:id="winner" style="-fx-fill: dodgerblue">
-                   <font>
-                       <Font size="20" />
-                   </font>
-               </Text>
-               <Button fx:id="restart" onAction="#reMatch" />
-           </children>
-       </VBox>
-   </children>
-</GridPane>
+        </ScrollPane>
+        <HBox alignment="CENTER" spacing="10">
+            <padding>
+                <Insets bottom="10" left="10" right="10" top="10" />
+            </padding>
+            <TextField fx:id="chatTextArea" maxWidth="80" minHeight="30" prefHeight="30" prefWidth="80" />
+            <Button fx:id="sendMessage" onAction="#sendMessage" text="send" wrapText="true" />
+
+        </HBox>
+    </VBox>
+</items>
+
+</SplitPane>

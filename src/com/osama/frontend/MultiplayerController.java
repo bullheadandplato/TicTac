@@ -20,6 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -112,6 +113,9 @@ public class MultiplayerController implements Initializable {
 
 
     public void startGame(ActionEvent actionEvent) {
+        Node source=(Node)actionEvent.getSource();
+        Stage c=(Stage)source.getScene().getWindow();
+        c.setWidth(450);
         error.setVisible(false);
         if (player1Name.getText().length() > 0) {
             Constants.player1Name = player1Name.getText();

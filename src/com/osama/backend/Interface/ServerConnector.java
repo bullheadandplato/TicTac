@@ -151,50 +151,55 @@ public class ServerConnector extends Thread implements ServerOperations{
                         aController.wins(Integer.parseInt(command.substring(4,command.length())));
                     });
                 }
-                if(command.startsWith("name")){
+                else if(command.startsWith("name")){
 
                             Constants.player2Name=command.substring(4,command.length());
 
 
                 }
-                if(command.startsWith("match")){
+                else if(command.startsWith("match")){
                     Platform.runLater(()->{
                         aController.setGameStatus(true);
                     });
 
                 }
-                if(command.startsWith("move")){
+                else if(command.startsWith("move")){
                     int box=Integer.parseInt(command.substring(4,command.length()));
                     Platform.runLater(()->{
                         aController.drawBox(box);
 
                     });
                 }
-                if(command.startsWith("player")){
+               else if(command.startsWith("player")){
                     int player=Integer.parseInt(command.substring(6,command.length()));
                     Platform.runLater(()->{
                         aController.setPlayer(player);
                     });
                 }
-                if(command.startsWith("quit")){
+                else if(command.startsWith("quit")){
                     Platform.runLater(()->{
                         aController.otherPlayerQuit();
                     });
                 }
-                if (command.startsWith("rematch")){
+                else if (command.startsWith("rematch")){
                     Platform.runLater(()->{
                         aController.reMatch();
 
                     });
                 }
-                if(command.startsWith("closing")){
+                else if(command.startsWith("closing")){
                     Platform.runLater(()->{
                         aController.serverDown();
                     });
                 }
-                if(command.startsWith("draw")){
+                else if(command.startsWith("draw")){
                     Platform.runLater(()->{
                         aController.matchDrawnfromServer();
+                    });
+                }
+                else if(command.startsWith("chat")){
+                    Platform.runLater(()->{
+                        aController.writeRecievedMessage(command.substring(4,command.length()));
                     });
                 }
 
@@ -227,6 +232,13 @@ public class ServerConnector extends Thread implements ServerOperations{
     public void writeDraw() {
         try{
             bw.writeUTF("draw");
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+    public void writeMessage(String message){
+        try{
+            bw.writeUTF(message);
         }catch (IOException e){
             e.printStackTrace();
         }

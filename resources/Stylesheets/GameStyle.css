@@ -21,3 +21,36 @@
     -fx-border-color: gray;
     -fx-border-radius: 10px;
 }
+#chatButton{
+    -fx-background-color: transparent; -fx-text-fill: whitesmoke; -fx-border-color: magenta;
+    -fx-background-radius: 30px; -fx-border-radius: 30px; -fx-font-size: 14px;
+    -fx-border-style: dotted; -fx-font-weight: bold; -fx-border-width: 2px;
+}
+#chatButton:hover{
+    -fx-background-color: whitesmoke;
+    -fx-text-fill: darksalmon;
+}
+#chatLabel{
+
+    -fx-font-size: 20px;
+    -fx-text-fill: whitesmoke;
+
+}
+#sendMessage{
+    -fx-background-radius: 10px;
+    -fx-background-color: green;
+    -fx-font-size: 10px;
+    -fx-font-style: oblique;
+    -fx-text-fill: whitesmoke;
+}
+#sendMessage:hover{
+    -fx-background-color: whitesmoke;
+    -fx-text-fill: green;
+    -fx-border-color: green;
+    -fx-border-style: dotted;
+    -fx-border-radius: 10px;
+}
+#chatTop{
+    -fx-background-color: dodgerblue;
+    -fx-background-radius: 15px;
+}

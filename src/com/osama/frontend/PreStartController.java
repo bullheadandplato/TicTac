@@ -20,7 +20,11 @@ public class PreStartController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         single.setOnAction(event -> {
-            //TODO
+            try{
+                Main.changeScene("single_mode.fxml");
+            }catch (IOException e){
+                e.printStackTrace();
+            }
         });
         multi.setOnAction(event -> {
             try {

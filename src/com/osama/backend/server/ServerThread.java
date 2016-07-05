@@ -95,8 +95,19 @@ public class ServerThread extends Thread {
                                 pl.writeDraw(pl.player1);
                             }
                         }
+                    }else if(command.startsWith("chat")){
+                        for (GamePlay x:
+                             onGoingMatches) {
+                            if(x.player1==socket){
+                                x.sendMessage(x.player1,command);
+                            }
+                            else if(x.player2==socket){
+                                x.sendMessage(x.player2,command);
+                            }
+                        }
                     }
                 }
+
         }catch (Exception e){
             int i=0;
             for (Socket a:

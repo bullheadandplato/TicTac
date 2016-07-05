@@ -12,16 +12,22 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 import javafx.util.Duration;
 
 
@@ -52,8 +58,22 @@ public class GameViewController implements Initializable {
     private ImageView playerIcon;
     @FXML
     private Text winCount;
-
-
+    @FXML
+    private VBox chatBox;
+    @FXML
+    private SplitPane splitPane;
+    @FXML
+    private  TextField chatTextArea;
+    @FXML
+    private ScrollPane chatList;
+    @FXML
+    private Button chatButton;
+    @FXML
+    private Button closeChatButton;
+@FXML
+private Button sendMessage;
+    @FXML
+    private VBox chatListBox;
 
     private Canvas canvas;
     private UIController controller;
@@ -63,6 +83,9 @@ public class GameViewController implements Initializable {
     private Alert quit;
     private int win=0;
     private int totalGames=0;
+    private static final int maxTextlength=9;
+    private boolean isChatOpened=false;
+    private Animations anim=new Animations();
 
     public void setPlayerID(int playerID) {
         this.playerID = playerID;
@@ -82,8 +105,26 @@ public class GameViewController implements Initializable {
         winCount.setFill(Color.DEEPPINK);
         winCount.setText(win+"/"+totalGames);
         whichPlayer.setText("Waiting for someone to connect");
+        sendMessage.setDisable(true);
         //create alerts to show when needed;
         createAlerts();
+        splitPane.getItems().removeAll(chatBox);
+        chatTextArea.textProperty().addListener(lis->{
+            if(chatTextArea.getText().length()>maxTextlength){
+                chatTextArea.setText(chatTextArea.getText(0,chatTextArea.getText().length()-1));
+
+            }
+            if(chatTextArea.getText().length()>0){
+                sendMessage.setDisable(false);
+            }
+            else {
+                sendMessage.setDisable(true);
+            }
+        });
+        chatTextArea.setOnMouseClicked(event->{
+            chatTextArea.clear();
+        });
+
             }
 
     public void setStatus(int player){
@@ -94,18 +135,18 @@ public class GameViewController implements Initializable {
         if(player==1){
             winner.setText("Winner: "+ Constants.player1Name);
             playerText1.setText("You Win :)");
-            animateNodebyFade(box);
-            animateNodeByScale(playerText1);
+            anim.animateNodebyFade(box);
+            anim.animateNodeByScale(playerText1);
             win++;
             winCount.setText(win+"/"+totalGames);
-            changeMatchcount(winCount);
+            anim.changeMatchcount(winCount);
         }
 
         else if(player==2){
             winner.setText("Winner: "+Constants.player2Name);
             playerText1.setText("You lose :(");
-            animateNodebyFade(box);
-            animateNodeByScale(playerText1);
+            anim.animateNodebyFade(box);
+            anim.animateNodeByScale(playerText1);
         }
         else{
             winner.setText("Draw");
@@ -122,6 +163,7 @@ public class GameViewController implements Initializable {
         this.canvas=null;
         playerText1.setVisible(false);
         whichPlayer.setVisible(true);
+        playerIcon.setImage(null);
 
     }
 
@@ -154,6 +196,7 @@ public class GameViewController implements Initializable {
 
     }
     public  void  setEnable(){
+        chatButton.setDisable(false);
         totalGames++;
         winCount.setText(win+"/"+totalGames);
         whichPlayer.setTextFill(Color.GREEN);
@@ -196,7 +239,14 @@ public class GameViewController implements Initializable {
         restart.setVisible(false);
         winner.setVisible(false);
         quit.showAndWait();
+        clearChat();
         clearEverything();
+    }
+
+    private void clearChat() {
+        chatButton.setDisable(true);
+        closeChatButton.fire();
+
     }
 
     @FXML
@@ -210,8 +260,8 @@ public class GameViewController implements Initializable {
         if(x.getResult()==ButtonType.OK){
             restart.setVisible(false);
             winner.setVisible(false);
-            cancelTransationEffectsScale(playerText1);
-            cancelTransationEffectsFade(box);
+            anim.cancelTransationEffectsScale(playerText1);
+            anim.cancelTransationEffectsFade(box);
         }
 
     }
@@ -231,8 +281,8 @@ public class GameViewController implements Initializable {
         if(abc.getResult()== ButtonType.OK){
             clearEverything();
             controller.startReMatch();
-            cancelTransationEffectsScale(playerText1);
-            cancelTransationEffectsFade(box);
+            anim.cancelTransationEffectsScale(playerText1);
+            anim.cancelTransationEffectsFade(box);
 
         }
         else {
@@ -243,10 +293,11 @@ public class GameViewController implements Initializable {
     public void resetCount(ActionEvent actionEvent) {
         totalGames=0;
         win=0;
+        winCount.setText(totalGames+"/"+win);
     }
 
-    public void changePlayer(ActionEvent actionEvent) {
-
+    public void exit(ActionEvent actionEvent) {
+        System.exit(0);
     }
 
 
@@ -261,44 +312,62 @@ public class GameViewController implements Initializable {
             e.printStackTrace();
         }
     }
-    private void animateNodebyFade(Node a){
-        FadeTransition  x=new FadeTransition(new Duration(1500),a);
-        x.setFromValue(100);
-        x.setToValue(0);
-        x.setCycleCount(1);
-        x.play();
 
-
-    }
-    private void animateNodeByScale(Node a){
-        ScaleTransition y=new ScaleTransition(new Duration(1500),a);
-        y.setToX(5);
-        y.setToY(5);
-        y.setCycleCount(1);
-        y.play();
-    }
-    private void cancelTransationEffectsScale(Node a){
-        ScaleTransition x=new ScaleTransition(new Duration(500),a);
-        x.setToY(1);
-        x.setToX(1);
-        x.setCycleCount(1);
-        x.play();
-    }
-    private void cancelTransationEffectsFade(Node a){
-        FadeTransition  x=new FadeTransition(new Duration(800),a);
+    public void openChat(ActionEvent actionEvent) {
+        isChatOpened=true;
+        Node source=(Node)actionEvent.getSource();
+        Stage c=(Stage)source.getScene().getWindow();
+        c.setWidth(600);
+        splitPane.setDividerPositions(.30);
+        splitPane.getItems().addAll(chatBox);
+        chatBox.setVisible(true);
+        FadeTransition x=new FadeTransition(new Duration(500),chatBox);
         x.setFromValue(0);
         x.setToValue(100);
         x.setCycleCount(1);
         x.play();
+    }
+
+    public void sendMessage() {
+        String message=chatTextArea.getText();
+        Label temp=new Label(message);
+        temp.setPadding(new Insets(5,5,5,5));
+        temp.setStyle("-fx-background-color: green; -fx-background-radius: 10px; -fx-text-fill: white;-fx-font-size: 12px;");
+        chatListBox.getChildren().addAll(temp);
+        //send message now
+        controller.sendMessagetoServer("chat"+message);
+        chatTextArea.clear();
+
 
     }
-    private void changeMatchcount(Node a){
-        ScaleTransition x=new ScaleTransition(new Duration(1000),a);
-        x.setFromX(5);
-        x.setFromY(5);
-        x.setToX(1);
-        x.setToY(1);
+
+    public void messageRecieved(String message) {
+        if(!isChatOpened){
+            chatButton.fire();
+        }
+        HBox fix=new HBox();
+        fix.setAlignment(Pos.CENTER_RIGHT);
+        Label temp=new Label(message);
+        fix.getChildren().addAll(temp);
+        temp.setPadding(new Insets(5,5,5,5));
+        temp.setStyle("-fx-background-color: lightgrey; -fx-background-radius: 10px; -fx-text-fill: white;-fx-font-size: 12px;");
+       chatListBox.getChildren().addAll(fix);
+    }
+
+    public void closeChat(ActionEvent actionEvent) {
+        isChatOpened=false;
+        FadeTransition x=new FadeTransition(new Duration(500),chatBox);
+        x.setFromValue(100);
+        x.setToValue(0);
         x.setCycleCount(1);
         x.play();
+        x.setOnFinished(event -> {
+            Node source=(Node)actionEvent.getSource();
+            Stage c=(Stage)source.getScene().getWindow();
+            splitPane.getItems().removeAll(chatBox);
+            c.setWidth(450);
+
+        });
+
     }
 }

@@ -1,28 +1,25 @@
 package com.osama.backend.Interface;
 
 import com.osama.frontend.GameViewController;
+import javafx.animation.ScaleTransition;
+import javafx.beans.binding.StringBinding;
 import javafx.scene.canvas.Canvas;
+import com.osama.backend.Interface.Constants;
 import org.jetbrains.annotations.Contract;
+
 
 /**
  * Created by osama on 5/13/16.
  * Controls the interface explicitly.
  */
 public class UIController {
-    private int[] clickedBoxes = new int[9];
-    private static final int Box1X = 40;
-    private static final int Box1Y = 40;
-    private static final int Box2Y = 130;
-    private static final int Box3Y = 190;
-    private static final int Box2X = 130;
-    private static final int Box3X = 190;
     private int player = 1;
     private ServerConnector server;
-    private boolean notWinner = true;
     private Drawer drawer;
     private int index = 0;
     private GameViewController manageInterface;
     private Boolean gameStatus;
+    private SharedData sharedData=new SharedData();
 
     public void setGameStatus(boolean gameStatus) {
         this.gameStatus = gameStatus;
@@ -55,11 +52,11 @@ public class UIController {
 
     public boolean determineMove(int clickedX, int clickedY) {
         boolean status = false;
-        if (index <= clickedBoxes.length && notWinner) {
-            if (clickedX < Box1X && clickedY < Box1Y) {
+        if (index <= sharedData.getClickedBoxes().length && sharedData.isNotWinner()) {
+            if (clickedX < Constants.Box1X && clickedY < Constants.Box1Y) {
                 if (!isClicked(-1)) {    //because by default array is initialized to 0 so can't use zero
                     manageInterface.setClickable(false);
-                    clickedBoxes[index++] = -1;
+                    sharedData.setClickedBoxes(index++,-1);
                     drawer.drawImage(0, player);
                     server.drawMove(-1);
                     if (Winner.isWinner(0, player)) {
@@ -69,9 +66,9 @@ public class UIController {
 
                     }
                 }
-            } else if (clickedX < Box2X && clickedY < Box1Y) {
+            } else if (clickedX < Constants.Box2X && clickedY < Constants.Box1Y) {
                 if (!isClicked(1)) {
-                    clickedBoxes[index++] = 1;
+                    sharedData.setClickedBoxes(index++,1);
                     drawer.drawImage(1, player);
                     server.drawMove(1);
                     manageInterface.setClickable(false);
@@ -83,10 +80,10 @@ public class UIController {
 
                     }
                 }
-            } else if (clickedX < Box3X && clickedY < Box1Y) {
+            } else if (clickedX < Constants.Box3X && clickedY < Constants.Box1Y) {
                 if (!isClicked(2)) {
                     manageInterface.setClickable(false);
-                    clickedBoxes[index++] = 2;
+                    sharedData.setClickedBoxes(index++,2);
                     drawer.drawImage(2, player);
                     server.drawMove(2);
                     if (Winner.isWinner(2, player)) {
@@ -97,10 +94,10 @@ public class UIController {
                     }
 
                 }
-            } else if (clickedX < Box1X && clickedY < Box2Y) {
+            } else if (clickedX < Constants.Box1X && clickedY < Constants.Box2Y) {
                 if (!isClicked(3)) {
                     manageInterface.setClickable(false);
-                    clickedBoxes[index++] = 3;
+                    sharedData.setClickedBoxes(index++,3);
                     server.drawMove(3);
                     drawer.drawImage(3, player);
                     if (Winner.isWinner(3, player)) {
@@ -111,10 +108,10 @@ public class UIController {
                     }
 
                 }
-            } else if (clickedX < Box2X && clickedY < Box2Y) {
+            } else if (clickedX < Constants.Box2X && clickedY < Constants.Box2Y) {
                 if (!isClicked(4)) {
                     manageInterface.setClickable(false);
-                    clickedBoxes[index++] = 4;
+                    sharedData.setClickedBoxes(index++,4);
                     server.drawMove(4);
                     drawer.drawImage(4, player);
                     if (Winner.isWinner(4, player)) {
@@ -126,10 +123,10 @@ public class UIController {
 
 
                 }
-            } else if (clickedX < Box3X && clickedY < Box2Y) {
+            } else if (clickedX < Constants.Box3X && clickedY < Constants.Box2Y) {
                 if (!isClicked(5)) {
                     manageInterface.setClickable(false);
-                    clickedBoxes[index++] = 5;
+                    sharedData.setClickedBoxes(index++,5);
                     server.drawMove(5);
                     drawer.drawImage(5, player);
                     if (Winner.isWinner(5, player)) {
@@ -140,10 +137,10 @@ public class UIController {
                     }
 
                 }
-            } else if (clickedX < Box1X && clickedY < Box3Y) {
+            } else if (clickedX < Constants.Box1X && clickedY < Constants.Box3Y) {
                 if (!isClicked(6)) {
                     manageInterface.setClickable(false);
-                    clickedBoxes[index++] = 6;
+                    sharedData.setClickedBoxes(index++,6);
                     server.drawMove(6);
                     drawer.drawImage(6, player);
                     if (Winner.isWinner(6, player)) {
@@ -155,10 +152,10 @@ public class UIController {
 
                 }
 
-            } else if (clickedX < Box2X && clickedY < Box3Y) {
+            } else if (clickedX < Constants.Box2X && clickedY < Constants.Box3Y) {
                 if (!isClicked(7)) {
                     manageInterface.setClickable(false);
-                    clickedBoxes[index++] = 7;
+                    sharedData.setClickedBoxes(index++,7);
                     server.drawMove(7);
                     drawer.drawImage(7, player);
                     if (Winner.isWinner(7, player)) {
@@ -169,10 +166,10 @@ public class UIController {
                     }
 
                 }
-            } else if (clickedX < Box3X && clickedY < Box3Y) {
+            } else if (clickedX < Constants.Box3X && clickedY < Constants.Box3Y) {
                 if (!isClicked(8)) {
                     manageInterface.setClickable(false);
-                    clickedBoxes[index++] = 8;
+                    sharedData.setClickedBoxes(index++,8);
                     server.drawMove(8);
                     drawer.drawImage(8, player);
                     if (Winner.isWinner(8, player)) {
@@ -196,7 +193,7 @@ public class UIController {
     private boolean isClicked(int boxNumber) {
         boolean status = false;
         for (int a :
-                clickedBoxes) {
+                sharedData.getClickedBoxes()) {
             if (a == boxNumber) {
                 status = true;
             }
@@ -209,13 +206,10 @@ public class UIController {
     }
 
     public int getWinner() {
-        notWinner = false;
+        sharedData.setNotWinner(false);
         return 1;
     }
 
-    public int getPlayer() {
-        return player;
-    }
 
     public int getIndex() {
         return index;
@@ -223,9 +217,9 @@ public class UIController {
 
     public void clearGameDrawing() {
         Winner.resetAll();
-        notWinner = true;
-        clickedBoxes = null;
-        clickedBoxes = new int[9];
+        sharedData.setNotWinner(true);
+        sharedData.setClickedBoxesasArray(null);
+        sharedData.setClickedBoxesasArray(new int[9]);
         index=0;
     }
 
@@ -237,7 +231,7 @@ public class UIController {
                     drawer.drawImage(0, 2);
                 } else
                     drawer.drawImage(0, 1);
-                clickedBoxes[index++] = box;
+                sharedData.setClickedBoxes(index++, box);
                 return;
             }
             manageInterface.setClickable(true);
@@ -245,7 +239,7 @@ public class UIController {
                 drawer.drawImage(box, 2);
             } else
                 drawer.drawImage(box, 1);
-            clickedBoxes[index++] = box;
+            sharedData.setClickedBoxes(index++,box);
         }
 
 
@@ -318,5 +312,12 @@ public class UIController {
 
     public void matchDrawnfromServer() {
         manageInterface.setStatus(0);
+    }
+
+    public void writeRecievedMessage(String message) {
+        manageInterface.messageRecieved(message);
+    }
+    public void sendMessagetoServer(String message){
+        server.writeMessage(message);
     }
 }

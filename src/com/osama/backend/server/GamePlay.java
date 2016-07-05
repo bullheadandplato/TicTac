@@ -152,4 +152,15 @@ public class GamePlay {
             }
         }
     }
+    public void sendMessage(Socket player, String message) {
+        try {
+            if (player == player1) {
+                bw2.writeUTF(message);
+            } else if (player == player2) {
+                bw1.writeUTF(message);
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+    }
+    }
 }
