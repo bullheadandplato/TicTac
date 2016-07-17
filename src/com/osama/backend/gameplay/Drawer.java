@@ -1,11 +1,10 @@
-package com.osama.backend.Interface;
+package com.osama.backend.gameplay;
 
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-import org.jetbrains.annotations.Contract;
 
 /**
  * Created by osama on 5/11/16.

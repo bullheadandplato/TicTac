@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<GridPane stylesheets="@/Stylesheets/multiPlayerStyle.css" fx:id="mainPane" alignment="TOP_CENTER" prefHeight="450.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.72" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.osama.frontend.MultiplayerController">
+<GridPane stylesheets="@/Stylesheets/multiPlayerStyle.css" fx:id="mainPane" alignment="TOP_CENTER" prefHeight="450.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.72" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.osama.frontend.fxml_controllers.MultiplayerController">
     <VBox fx:id="mainBox" alignment="TOP_CENTER" prefHeight="104.0" prefWidth="400.0"  GridPane.columnIndex="0" GridPane.rowIndex="0">
 
         <padding>

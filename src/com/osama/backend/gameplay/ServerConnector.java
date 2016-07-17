@@ -1,11 +1,9 @@
-package com.osama.backend.Interface;
+package com.osama.backend.gameplay;
 
-import com.osama.frontend.GameViewController;
 import javafx.application.Platform;
 
 import java.io.*;
 import java.net.Socket;
-import java.nio.Buffer;
 
 /**
  * Created by osama on 5/25/16.

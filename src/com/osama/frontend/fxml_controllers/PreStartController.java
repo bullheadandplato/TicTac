@@ -1,6 +1,6 @@
-package com.osama.frontend;
+package com.osama.frontend.fxml_controllers;
 
-import com.osama.backend.Interface.ServerConnector;
+import com.osama.frontend.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;

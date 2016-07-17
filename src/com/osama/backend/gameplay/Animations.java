@@ -1,4 +1,4 @@
-package com.osama.frontend;
+package com.osama.backend.gameplay;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;

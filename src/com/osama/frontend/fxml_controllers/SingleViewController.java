@@ -1,6 +1,6 @@
-package com.osama.frontend;
+package com.osama.frontend.fxml_controllers;
 
-import javafx.animation.FadeTransition;
+import com.osama.backend.gameplay.Animations;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +15,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ResourceBundle;

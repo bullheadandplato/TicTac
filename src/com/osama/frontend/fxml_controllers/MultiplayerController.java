@@ -1,8 +1,9 @@
-package com.osama.frontend;
+package com.osama.frontend.fxml_controllers;
 
-import com.osama.backend.Interface.Constants;
-import com.osama.backend.Interface.ServerConnector;
+import com.osama.backend.gameplay.Constants;
+import com.osama.backend.gameplay.ServerConnector;
 import com.osama.backend.server.Server;
+import com.osama.frontend.Main;
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
@@ -13,12 +14,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.*;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;

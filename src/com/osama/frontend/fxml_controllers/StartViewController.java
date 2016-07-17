@@ -1,7 +1,7 @@
-package com.osama.frontend;
+package com.osama.frontend.fxml_controllers;
 
-import com.osama.backend.Interface.Constants;
-import com.osama.backend.Interface.ServerConnector;
+import com.osama.backend.gameplay.Constants;
+import com.osama.frontend.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

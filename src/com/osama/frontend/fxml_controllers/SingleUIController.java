@@ -1,9 +1,9 @@
-package com.osama.frontend;
+package com.osama.frontend.fxml_controllers;
 
-import com.osama.backend.Interface.Constants;
-import com.osama.backend.Interface.Drawer;
-import com.osama.backend.Interface.SharedData;
-import com.osama.backend.Interface.Winner;
+import com.osama.backend.gameplay.Constants;
+import com.osama.backend.gameplay.Drawer;
+import com.osama.backend.gameplay.SharedData;
+import com.osama.backend.gameplay.Winner;
 import javafx.scene.canvas.Canvas;
 
 import java.util.Random;

@@ -1,10 +1,7 @@
-package com.osama.backend.Interface;
+package com.osama.backend.gameplay;
 
-import com.osama.frontend.GameViewController;
-import javafx.animation.ScaleTransition;
-import javafx.beans.binding.StringBinding;
+import com.osama.frontend.fxml_controllers.GameViewController;
 import javafx.scene.canvas.Canvas;
-import com.osama.backend.Interface.Constants;
 import org.jetbrains.annotations.Contract;
 
 

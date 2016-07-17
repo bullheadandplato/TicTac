@@ -1,4 +1,4 @@
-package com.osama.backend.Interface;
+package com.osama.backend.gameplay;
 
 import org.jetbrains.annotations.Contract;
 

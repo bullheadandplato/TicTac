@@ -3,12 +3,9 @@ package com.osama.frontend;
 import com.osama.backend.server.Server;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -23,7 +20,7 @@ public class Main extends Application {
     }
     @Override
     public void start(Stage primaryStage) throws Exception {
-        root= FXMLLoader.load(Main.class.getResource("preStart.fxml"));
+        root= FXMLLoader.load(Main.class.getResource("fxml/preStart.fxml"));
         Scene scene=new Scene(root,400,500);
         stage.setScene(scene);
         stage.setTitle("Tic Tac");
@@ -37,7 +34,7 @@ public class Main extends Application {
         });
     }
     public static void changeScene(String formName) throws IOException{
-        root=FXMLLoader.load(Main.class.getResource(formName));
+        root=FXMLLoader.load(Main.class.getResource("fxml/"+formName));
         stage.getScene().setRoot(root);
     }
     public static void main(String[] args){

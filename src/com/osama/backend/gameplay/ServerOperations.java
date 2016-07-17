@@ -1,4 +1,4 @@
-package com.osama.backend.Interface;
+package com.osama.backend.gameplay;
 
 /**
  * Created by osama on 5/25/16.

@@ -19,7 +19,7 @@
 <?import javafx.scene.text.Text?>
 
 <?import javafx.scene.control.ScrollPane?>
-<SplitPane fx:id="splitPane" dividerPositions="0.5" stylesheets="@/Stylesheets/GameStyle.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.osama.frontend.GameViewController">
+<SplitPane fx:id="splitPane" dividerPositions="0.5" stylesheets="@/Stylesheets/GameStyle.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.osama.frontend.fxml_controllers.GameViewController">
 <items>
     <GridPane fx:id="mainPane" alignment="TOP_CENTER" maxWidth="420" minWidth="420" prefWidth="420">
 
