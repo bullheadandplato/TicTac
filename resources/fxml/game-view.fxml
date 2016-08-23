@@ -36,7 +36,7 @@
 
                         <Menu mnemonicParsing="false" text="Help">
                             <items>
-                                <MenuItem mnemonicParsing="false" style="-fx-font-size: 14px;" text="About" />
+                                <MenuItem mnemonicParsing="false" style="-fx-font-size: 14px;" text="About" onAction="#showAbout" />
                             </items>
                         </Menu>
                     </menus>
@@ -95,7 +95,11 @@
                             <Font size="20" />
                         </font>
                     </Text>
-                    <Button fx:id="restart" onAction="#reMatch" />
+                    <HBox  prefWidth="100" maxWidth="100" minWidth="100" alignment="CENTER" fx:id="restart" style="-fx-background-color: greenyellow">
+                        <ImageView fx:id="restartImg" fitHeight="30" fitWidth="30"/>
+                        <Button text="restart"   onAction="#reMatch" style="-fx-background-color: transparent; -fx-font-style: italic" />
+                    </HBox>
+
                 </children>
             </VBox>
         </children>
