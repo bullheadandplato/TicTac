@@ -13,7 +13,7 @@ public class Controller {
     private float  x_axis,y_axis;
     private int[][] WinBox=new int[][]{{0,0,0},{0,0,0},{0,0,0}};//This save the box which is click
     private int id=1;
-
+    private int playerID;
     public Controller()
     {}
     public void Accept_Drawer_Class_Instance(Drawer canvas )
@@ -231,4 +231,11 @@ public class Controller {
         uiController=con;
     }
 
+    public void setEnable() {
+        //set the drawer to show it self.
+    }
+
+    public void setPlayerID(int playerID) {
+        this.playerID = playerID;
+    }
 }

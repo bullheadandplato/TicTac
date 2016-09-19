@@ -9,7 +9,6 @@ import android.app.Activity;
 public class UIController {
 
     ServerConnector connector;
-
     public UIController(Activity act){
         connector=new ServerConnector();
         connector.setActivity(act);
@@ -21,7 +20,6 @@ public class UIController {
     }
 
     public void drawBox(int box) {
-
     }
 
     public void setPlayer(int player) {
@@ -37,8 +35,5 @@ public class UIController {
     }
 
     public void matchDrawnfromServer() {
-    }
-    public void drawMove(int box){
-
     }
 }
