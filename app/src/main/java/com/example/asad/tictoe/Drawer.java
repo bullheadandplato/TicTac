@@ -29,6 +29,8 @@ Drawer Class draw the whole UI and placing image in the boxes and
     Bitmap mFinalbitmap2=BitmapFactory.decodeResource(getResources(), R.drawable.zero);
     public int[] arr = new int[9];
     private Controller controller;
+    private int[] array_pick_box=new int[9];
+    private boolean Check_Status=false;
     //These are the coordinate of the screen cord is coordinate
     public float firstcord = 0f;
     public float secndcord = 0f;
@@ -64,17 +66,18 @@ Drawer Class draw the whole UI and placing image in the boxes and
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas1 = canvas;
-        canvas.save();
-        Paint paint = new Paint();
-        paint.setColor(Color.LTGRAY);
-        paint.setStrokeWidth(widthborder);
-        canvas.drawLine(firstcord, fifthcord, firstcord, eightcord, paint);
-        canvas.drawLine(secndcord, fifthcord, secndcord, eightcord, paint);
-        canvas.drawLine(thirdcord, sixcord, forthcord, sixcord, paint);
-        canvas.drawLine(thirdcord, sevencord, forthcord, sevencord, paint);
-        Place_Images_In_Boxes();
-
+        if(Check_Status) {
+            canvas1 = canvas;
+            canvas.save();
+            Paint paint = new Paint();
+            paint.setColor(Color.LTGRAY);
+            paint.setStrokeWidth(widthborder);
+            canvas.drawLine(firstcord, fifthcord, firstcord, eightcord, paint);
+            canvas.drawLine(secndcord, fifthcord, secndcord, eightcord, paint);
+            canvas.drawLine(thirdcord, sixcord, forthcord, sixcord, paint);
+            canvas.drawLine(thirdcord, sevencord, forthcord, sevencord, paint);
+            Place_Images_In_Boxes();
+        }
 
     }
 
@@ -169,7 +172,7 @@ Drawer Class draw the whole UI and placing image in the boxes and
     public void Place_Images_In_Boxes()//This check the which box is touched and which is not and fill the touched boxes with image
     {
 
-        for (int arrtem : arr) {
+        for (int arrtem : array_pick_box) {
             switch (arrtem) {
                 case 1:
                     ShowimageA11();
@@ -267,7 +270,43 @@ Drawer Class draw the whole UI and placing image in the boxes and
     }
     public void Accept_Box(int num)
     {
+switch (num)
+{
+    case 1:
+        array_pick_box[0]=1;
+        break;
+    case 2:
+        array_pick_box[1]=2;
+        break;
+    case 3:
+        array_pick_box[2]=3;
+        break;
+    case 4:
+        array_pick_box[3]=4;
+        break;
+    case 5:
+        array_pick_box[4]=5;
+        break;
+    case 6:
+        array_pick_box[5]=6;
+        break;
+    case 7:
+        array_pick_box[6]=7;
+        break;
+    case 8:
+        array_pick_box[7]=8;
+        break;
+    case 9:
+        array_pick_box[8]=9;
+        break;
 
+
+}
+
+    }
+    public  void Set_Status(boolean check)
+    {
+        Check_Status=check;
 
     }
 }
