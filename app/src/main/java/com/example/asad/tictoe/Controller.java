@@ -3,6 +3,8 @@ package com.example.asad.tictoe;
 import android.util.Log;
 import android.view.MotionEvent;
 
+import com.osama.backend.UIController;
+
 /**
  * Created by asad on 5/28/16.
  */
@@ -25,7 +27,7 @@ public class Controller {
         y_axis = y;
 
         if (instace1.thirdcord < x_axis && x_axis < instace1.firstcord && instace1.fifthcord < y_axis && y_axis < instace1.sixcord)//For A11 Box
-        {
+        {   uiController.drawBox(1);
             if (instace1.arr[0] == 0) {
                 if (id % 2 != 0) {
                     instace1.arr2[0] = 1;
@@ -39,7 +41,7 @@ public class Controller {
                 instace1.arr[0] = 1;
             }
         } else if (instace1.firstcord < x_axis && x_axis < instace1.secndcord && instace1.fifthcord < y_axis && y_axis < instace1.sixcord) {
-
+             uiController.drawBox(2);
             if (instace1.arr[1] == 0) {
                 if (id % 2 != 0) {
                     instace1.arr2[1] = 1;
@@ -53,6 +55,7 @@ public class Controller {
                 instace1.arr[1] = 2;
             }
         } else if (instace1.secndcord < x_axis && x_axis < instace1.forthcord && instace1.fifthcord < y_axis && y_axis < instace1.sixcord) {
+            uiController.drawBox(3);
             if (instace1.arr[2] == 0) {
                 if (id % 2 != 0) {
                     instace1.arr2[2] = 1;
@@ -66,6 +69,7 @@ public class Controller {
                 instace1.arr[2] = 3;
             }
         } else if (instace1.thirdcord < x_axis && x_axis < instace1.firstcord && instace1.sixcord < y_axis && y_axis < instace1.sevencord) {
+            uiController.drawBox(4);
             if (instace1.arr[3] == 0) {
                 if (id % 2 != 0) {
                     instace1.arr2[3] = 1;
@@ -80,6 +84,7 @@ public class Controller {
                 instace1.arr[3] = 4;
             }
         } else if (instace1.firstcord < x_axis && x_axis < instace1.secndcord && instace1.sixcord < y_axis && y_axis < instace1.sevencord) {
+            uiController.drawBox(5);
             if (instace1.arr[4] == 0) {
                 if (id % 2 != 0) {
                     instace1.arr2[4] = 1;
@@ -93,6 +98,7 @@ public class Controller {
                 instace1.arr[4] = 5;
             }
         } else if (instace1.secndcord < x_axis && x_axis < instace1.forthcord && instace1.sixcord < y_axis && y_axis < instace1.sevencord) {
+            uiController.drawBox(6);
             if (instace1.arr[5] == 0) {
                 if (id % 2 != 0) {
                     instace1.arr2[5] = 1;
@@ -106,6 +112,7 @@ public class Controller {
                 instace1.arr[5] = 6;
             }
         } else if (instace1.thirdcord < x_axis && x_axis < instace1.firstcord && instace1.sevencord < y_axis && y_axis < instace1.eightcord) {
+            uiController.drawBox(7);
             if (instace1.arr[6] == 0) {
                 if (id % 2 != 0) {
                     instace1.arr2[6] = 1;
@@ -119,6 +126,7 @@ public class Controller {
                 instace1.arr[6] = 7;
             }
         } else if (instace1.firstcord < x_axis && x_axis < instace1.secndcord && instace1.sevencord < y_axis && y_axis < instace1.eightcord) {
+            uiController.drawBox(8);
             if (instace1.arr[7] == 0) {
                 if (id % 2 != 0) {
                     instace1.arr2[7] = 1;
@@ -132,6 +140,7 @@ public class Controller {
                 instace1.arr[7] = 8;
             }
         } else if (instace1.secndcord < x_axis && x_axis < instace1.forthcord && instace1.sevencord < y_axis && y_axis < instace1.eightcord) {
+            uiController.drawBox(9);
             if (instace1.arr[8] == 0){
                 if (id % 2 != 0) {
                     instace1.arr2[8] = 1;
@@ -200,6 +209,26 @@ public class Controller {
             return true;
         }
         return false;
+    }
+    public void drawBox(int box){
+        switch (box) {
+            case 1:
+            instace1.Accept_Box(1);
+            case 2:
+                instace1.Accept_Box(2);
+            case 3:
+                instace1.Accept_Box(3);
+            case 4:
+                instace1.Accept_Box(4);
+            case 5:
+                instace1.Accept_Box(5);
+            case 6:
+            instace1.Accept_Box(6);
+        }
+    }
+    UIController uiController;
+    public void setUIController(UIController con){
+        uiController=con;
     }
 
 }

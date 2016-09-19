@@ -28,7 +28,7 @@ Drawer Class draw the whole UI and placing image in the boxes and
     Bitmap mFinalbitmap = BitmapFactory.decodeResource(getResources(), R.drawable.cross);
     Bitmap mFinalbitmap2=BitmapFactory.decodeResource(getResources(), R.drawable.zero);
     public int[] arr = new int[9];
-    private Controller controller=new Controller();
+    private Controller controller;
     //These are the coordinate of the screen cord is coordinate
     public float firstcord = 0f;
     public float secndcord = 0f;
@@ -260,5 +260,14 @@ Drawer Class draw the whole UI and placing image in the boxes and
         paint.setColor(Color.RED);
         paint.setStrokeWidth(widthborder);
         canvas1.drawLine(forthcord, fifthcord,thirdcord ,eightcord , paint);
+    }
+    public void Accept_Controller_Class_Instance(Controller con)
+    {
+        controller=con;
+    }
+    public void Accept_Box(int num)
+    {
+
+
     }
 }

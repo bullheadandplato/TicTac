@@ -22,8 +22,9 @@ public class MainActivity extends Activity {
        final
        Drawer Gameshow=new Drawer(this);
         controller.Accept_Drawer_Class_Instance(Gameshow);
-
         UIController uiController=new UIController(this);
+        controller.setUIController(uiController);
+        Gameshow.Accept_Controller_Class_Instance(controller);
         Button playbtn=(Button)findViewById(R.id.button1);
 
 playbtn.setOnClickListener(new View.OnClickListener() {
