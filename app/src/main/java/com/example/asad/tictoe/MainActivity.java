@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.osama.backend.UIController;
+
 public class MainActivity extends Activity {
 
     @Override
@@ -21,7 +23,7 @@ public class MainActivity extends Activity {
        Drawer Gameshow=new Drawer(this);
         controller.Accept_Drawer_Class_Instance(Gameshow);
 
-
+        UIController uiController=new UIController(this);
         Button playbtn=(Button)findViewById(R.id.button1);
 
 playbtn.setOnClickListener(new View.OnClickListener() {
