@@ -130,7 +130,7 @@ public class MultiplayerController implements Initializable {
             Constants.ServerIP = serverIP.getText();
             if(ServerConnector.serverCheck()){
                 try {
-                    Main.changeScene("GameView.fxml");
+                    Main.changeScene("game-view.fxml");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

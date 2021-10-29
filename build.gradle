@@ -1,0 +1,21 @@
+plugins {
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.10'
+}
+repositories {
+    mavenCentral()
+}
+group 'com.osama'
+version '1.0.0'
+
+javafx {
+    version = "17"
+    modules = ['javafx.controls', 'javafx.fxml']
+}
+
+
+application {
+    mainClass = 'com.osama.frontend.Main'
+}
+
+

@@ -1,6 +1,5 @@
 package com.osama.backend.gameplay;
 
-import org.jetbrains.annotations.Contract;
 
 /**
  * Created by osama on 6/26/16.
@@ -24,7 +23,6 @@ public class SharedData {
         return notWinner;
     }
 
-    @Contract(pure = true)
     public boolean isClicked(int boxNumber) {
         boolean status = false;
         for (int a :

@@ -91,34 +91,35 @@ public class SingleViewController  implements Initializable{
 
     private void setIcons() {
         if(controller.getAIplayerID()==2){
-            playerIcon.setImage(new Image("images/cross.png"));
+            playerIcon.setImage(new Image(this.getClass().getResourceAsStream("/images/cross.png")));
 
         }
         else
-            playerIcon.setImage(new Image("images/zero.png"));
+            playerIcon.setImage(new Image(this.getClass().getResourceAsStream("/images/zero.png")));
     }
 
-    public void setResult(String x){
+    public void setResult(String x) {
 
-        if(x.equals("draw")){
-            //match is drawn
-            playerText1.setText("Match draw");
-            whichPlayer.setVisible(true);
-            winner.setText("Draw");
-            winner.setVisible(true);
-
-        }
-        else if(x.equals("human")){
-            playerText1.setText("You win :)");
-            playerText1.setVisible(true);
-            winner.setText("You wins");
-            winner.setVisible(true);
-        }
-        else if(x.equals("ai")){
-           playerText1.setText("You lose :(");
-            playerText1.setVisible(true);
-            winner.setText("Machine wins");
-            winner.setVisible(true);
+        switch (x) {
+            case "draw" -> {
+                //match is drawn
+                playerText1.setText("Match draw");
+                whichPlayer.setVisible(true);
+                winner.setText("Draw");
+                winner.setVisible(true);
+            }
+            case "human" -> {
+                playerText1.setText("You win :)");
+                playerText1.setVisible(true);
+                winner.setText("You wins");
+                winner.setVisible(true);
+            }
+            case "ai" -> {
+                playerText1.setText("You lose :(");
+                playerText1.setVisible(true);
+                winner.setText("Machine wins");
+                winner.setVisible(true);
+            }
         }
         restart.setVisible(true);
         playAnimationatEnd();

@@ -21,7 +21,7 @@ public class PreStartController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         single.setOnAction(event -> {
             try{
-                Main.changeScene("single_mode.fxml");
+                Main.changeScene("single-mode.fxml");
             }catch (IOException e){
                 e.printStackTrace();
             }
@@ -29,7 +29,7 @@ public class PreStartController implements Initializable {
         multi.setOnAction(event -> {
             try {
 
-                Main.changeScene("multiPlayer.fxml");
+                Main.changeScene("multiplayer-layout.fxml");
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -1,6 +1,5 @@
 package com.osama.backend.gameplay;
 
-import org.jetbrains.annotations.Contract;
 
 /**
  * Created by osama on 5/12/16.
@@ -65,7 +64,6 @@ public class Winner {
         winBoxes=sort(winBoxes); //sort the numbers
         return winBoxes;
     }
-    @Contract(pure = true)
     private static int[] sort(int[] win){
         int min=win[0];
         int temp;

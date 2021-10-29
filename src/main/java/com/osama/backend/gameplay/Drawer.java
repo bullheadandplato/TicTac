@@ -42,49 +42,37 @@ public Drawer(){
 
     public void drawImage(int box, int player) {
         if (player == 1) {
-            image = new Image("images/cross.png");
+            image = new Image(this.getClass().getResourceAsStream("/images/cross.png"));
         } else if (player == 2) {
-            image = new Image("images/zero.png");
+            image = new Image(this.getClass().getResourceAsStream("/images/zero.png"));
         }
         switch (box) {
-            case 0: {
+            case 0 -> {
                 graphicsContext.drawImage(image, 5, 5, w, h);
-                break;
             }
-            case 1: {
+            case 1 -> {
                 graphicsContext.drawImage(image, 70, 2, w, h);
-                break;
             }
-            case 2: {
+            case 2 -> {
                 graphicsContext.drawImage(image, 150, 0, w, h);
-                break;
             }
-            case 3: {
+            case 3 -> {
                 graphicsContext.drawImage(image, 0, 70, w, h);
-                break;
             }
-            case 4: {
+            case 4 -> {
                 graphicsContext.drawImage(image, 70, 70, w, h);
-                break;
             }
-            case 5: {
+            case 5 -> {
                 graphicsContext.drawImage(image, 150, 70, w, h);
-                break;
             }
-            case 6: {
+            case 6 -> {
                 graphicsContext.drawImage(image, 0, 150, w, h);
-                break;
             }
-
-
-            case 7: {
+            case 7 -> {
                 graphicsContext.drawImage(image, 70, 150, w, h);
-                break;
             }
-
-            case 8: {
+            case 8 -> {
                 graphicsContext.drawImage(image, 150, 150, w, h);
-                break;
             }
         }
     }

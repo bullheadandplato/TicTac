@@ -2,7 +2,6 @@ package com.osama.backend.gameplay;
 
 import com.osama.frontend.fxml_controllers.GameViewController;
 import javafx.scene.canvas.Canvas;
-import org.jetbrains.annotations.Contract;
 
 
 /**
@@ -186,7 +185,6 @@ public class UIController {
         return status;
     }
 
-    @Contract(pure = true)
     private boolean isClicked(int boxNumber) {
         boolean status = false;
         for (int a :
