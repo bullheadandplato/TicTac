@@ -66,17 +66,17 @@ public class GameViewController implements Initializable {
     @FXML
     private              VBox         chatListBox;
     @FXML
-    private              ImageView    restartImg;
-    private              Canvas       canvas;
-    private              UIController controller;
-    private              int          clickedX;
-    private              int          clickedY;
-    private              int          playerID      = 0;
-    private              Alert        quit;
-    private              int          win           = 0;
-    private              int          totalGames    = 0;
-    private              boolean      isChatOpened  = false;
-    private              Animations   anim          = new Animations();
+    private       ImageView    restartImg;
+    private       Canvas       canvas;
+    private       UIController controller;
+    private       int          clickedX;
+    private       int          clickedY;
+    private       int          playerID     = 0;
+    private       Alert        quit;
+    private       int          win          = 0;
+    private       int          totalGames   = 0;
+    private       boolean      isChatOpened = false;
+    private final Animations   anim         = new Animations();
 
     public void setPlayerID(int playerID) {
         this.playerID = playerID;
